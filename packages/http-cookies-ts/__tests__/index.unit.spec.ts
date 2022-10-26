@@ -46,6 +46,10 @@ describe('cookies to object (cookiesToObj)', () => {
       expect(cookieObj).toEqual({})
     });
 
+    it('should trim cookies with spaces/tabs/etc. at the start or end of the cookie name.', () => {
+      const cookieObj = cookiesToObj(' remove =spaces;;;endSpaces     =gone');
+      expect(cookieObj).toEqual({ remove: 'spaces', endSpaces: 'gone' })
+    });
 
   });
 

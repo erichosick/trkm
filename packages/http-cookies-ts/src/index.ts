@@ -49,8 +49,8 @@ export const cookiesToObj: cookiesToObjSignature = (
       const cookieParts = cookie.split('=');
       if (cookieParts.length === 2) {
         const decodedPropertyName = decodeURIComponent(cookieParts[0]);
-        const finalPropertyName = options?.alter ?
-          options.alter(decodedPropertyName) : decodedPropertyName;
+        const finalPropertyName = (options?.alter ?
+          options.alter(decodedPropertyName) : decodedPropertyName).trim();
         // NOTE: It should not be possible for document.cookie to have more than
         // one cookie of the same name unless we are converting the property names
         // to lower case.
