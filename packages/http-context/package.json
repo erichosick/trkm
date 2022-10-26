@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-context",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Pull values from different sources on a webpage (cookies, heading, web page parameters, etc.) and place them in a json object for later processing.",
   "keywords": [
     "javascript",
@@ -39,7 +39,7 @@
     "build:watch": "rm -rf ./dist && webpack --mode production --watch"
   },
   "dependencies": {
-    "@trkm/http-cookies-ts": "^0.1.4",
+    "@trkm/http-cookies-ts": "^0.1.5",
     "@trkm/object-json-path-ts": "^0.1.4"
   },
   "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711"
