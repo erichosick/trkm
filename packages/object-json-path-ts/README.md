@@ -1,4 +1,4 @@
-# **object-json-path-ts**
+# **@trkm/object-json-path-ts**
 
 Using a small subset of [JSONpath](https://jsontostring.com/jsonpath/) features, **object-json-path-ts** gets or sets a value in a JSON object.
 
@@ -18,7 +18,7 @@ Construct and access an object using JSONPath. The two functions provided are:
 Inserts a value to an object given a JSON path.
 
 ```typescript
-import { insertIntoObject } from 'object-json-path-ts';
+import { insertIntoObject } from '@trkm/object-json-path-ts';
 
 // build an admin using one path/value at a time.
 const adminUser = {};

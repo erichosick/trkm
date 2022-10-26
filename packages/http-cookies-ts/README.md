@@ -1,4 +1,4 @@
-# `http-cookies-ts`
+# **@trkm/http-cookies-ts**
 
 Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie) (document.cookie) to a javascript object: the cookie name becomes the object property name.
 
@@ -19,7 +19,7 @@ Converts a cookie string, often returned by document.cookie ([more info](https:/
 * @returns - An object whose properties are the properties of all cookies in the cookies string and value is the value of the cookie.
 
 ```typescript
-import { cookiesToObj } from 'cookie-obj';
+import { cookiesToObj } from '@trkm/http-cookies-ts';
 
 const cookies = cookiesToObj(document.cookie);
 
