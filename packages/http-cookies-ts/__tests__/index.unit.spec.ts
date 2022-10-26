@@ -27,7 +27,7 @@ describe('cookies to object (cookiesToObj)', () => {
     });
 
     it('should support converting property names to lower case.', () => {
-      const cookieObj = cookiesToObj('UPPER=case', toLowerCase);
+      const cookieObj = cookiesToObj('UPPER=case', { alter: toLowerCase });
       expect(cookieObj).toEqual({ upper: 'case' })
     });
 
@@ -55,7 +55,7 @@ describe('cookies to object (cookiesToObj)', () => {
       expect(() => cookiesToObj('duplicate=value;duplicate=value'))
         .toThrow('Cookies had more than one cookie with a property named \'duplicate\'.');
 
-      expect(() => cookiesToObj('SIMPLE=value;simple=value', toLowerCase))
+      expect(() => cookiesToObj('SIMPLE=value;simple=value', { alter: toLowerCase }))
         .toThrow('Cookies had more than one cookie with a property named \'simple\'.');
 
     });

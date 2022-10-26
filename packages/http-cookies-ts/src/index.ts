@@ -1,3 +1,6 @@
+// THOUGHTS: Log a warning if invalid cookies are ignored. Perhaps write a
+// similar function that can provide in-depth debug information.
+
 /**
  * Defining an object interface with string keys and string values.
  * Example:
@@ -12,8 +15,9 @@ export interface ObjStrKeyVal {
 
 export type alterName = (info: string) => string;
 
-// THOUGHTS: Log a warning if invalid cookies are ignored. Perhaps write a
-// similar function that can provide in-depth debug information.
+export interface Options {
+  alter?: alterName
+}
 
 /**
  * Converts a cookie string as described by https://developer.mozilla.org/en-US/docs/web/api/document/cookie
@@ -28,7 +32,7 @@ export type alterName = (info: string) => string;
  */
 export const cookiesToObj = (
   cookies: string,
-  alter: alterName | null = null
+  options?: Options
 ): ObjStrKeyVal => {
   const result: ObjStrKeyVal = {};
   for (let cookie of cookies.split(';')) {
@@ -37,7 +41,8 @@ export const cookiesToObj = (
       const cookieParts = cookie.split('=');
       if (cookieParts.length === 2) {
         const decodedPropertyName = decodeURIComponent(cookieParts[0]);
-        const finalPropertyName = alter ? alter(decodedPropertyName) : decodedPropertyName;
+        const finalPropertyName = options?.alter ?
+          options.alter(decodedPropertyName) : decodedPropertyName;
         // NOTE: It should not be possible for document.cookie to have more than
         // one cookie of the same name unless we are converting the property names
         // to lower case.
@@ -50,4 +55,3 @@ export const cookiesToObj = (
   }
   return result;
 }
-

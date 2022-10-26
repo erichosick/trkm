@@ -14,7 +14,8 @@ Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/a
 Converts a cookie string, often returned by document.cookie ([more info](https://developer.mozilla.org/en-US/docs/web/api/document/cookie)) to an object. WARNING: Cookie names are case sensitive along with javascript object properties
 
 * @param cookies - A string containing zero or more cookies as defined by [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie).
-* @param alter - When provided, enables converting a cookie name before using the cookie name as the object property name.
+* @param options - Options provided to the cookiesToObj
+  **alter**: When provided, enables converting a cookie name before using the cookie name as the object property name.
 * @returns - An object whose properties are the properties of all cookies in the cookies string and value is the value of the cookie.
 
 ```typescript
@@ -30,7 +31,9 @@ const toLowerCase = (input: string) => {
 
 const cookies2 = cookiesToObj(
   'ENABLED=true;updated=false;',
-  toLowerCase
+  {
+    alter: toLowerCase
+  }
 );
 
 console.log(cookies2);
