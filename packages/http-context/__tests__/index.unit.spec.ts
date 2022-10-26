@@ -33,4 +33,14 @@ describe('http-context uuid', () => {
     })
   });
 
+  it('should expose trkm.context.all', () => {
+    document.cookie = 'haveA=final_cookie';
+    const testObj = globalThis.trkm.context.all();
+    expect(testObj).toEqual({
+      cookies: {
+        haveA: 'final_cookie',
+      },
+    })
+  });
+
 });
