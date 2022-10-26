@@ -57,8 +57,11 @@ yarn publish:all
 ### Adding a New Project
 
 ```bash
-yarn lerna:create {package-name}
-# Example yarn lerna:create wp-context
+# Add a new project
+yarn lerna:create {@name/new-package-name}  # Example yarn lerna:create @trkm/wp-context
+
+# Link it to other projects
+yarn add {@name/existing-module} --scope={@name/new-package-name} # yarn lerna add @trkm/http-cookies-ts --scope=@trkm/http-context
 ```
 
 ### Linking To Another Project

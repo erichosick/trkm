@@ -17,6 +17,12 @@ export interface JsonPathValue {
 
 export type JsonPathValues = JsonPathValue[];
 
+
+export type insertIntoObjectInterface = (
+  jsObj: unknown,
+  jsonPathValues: JsonPathValue | JsonPathValues,
+) => unknown;
+
 /**
  * Adds a value to an object given a JSONPath.
  *
@@ -40,7 +46,7 @@ export type JsonPathValues = JsonPathValue[];
  *   const anObject = {};
  *   insertIntoObject(anObject, { path: 'user.age', value: 23 }));
  */
-export const insertIntoObject = (
+export const insertIntoObject: insertIntoObjectInterface = (
   jsObj: unknown,
   jsonPathValues: JsonPathValue | JsonPathValues,
 ): unknown => {

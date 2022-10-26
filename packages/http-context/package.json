@@ -1,0 +1,44 @@
+{
+  "name": "@trkm/http-context",
+  "version": "0.0.0",
+  "description": "Pull values from different sources on a webpage (cookies, heading, web page parameters, etc.) and place them in a json object for later processing.",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "object",
+    "builder",
+    "html context"
+  ],
+  "author": "Eric Hosick <erichosick@gmail.com>",
+  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/wp-context",
+  "bugs": {
+    "url": "https://github.com/erichosick/trkm/issues",
+    "email": "erichosick@gmail.com"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "./dist/bundle.js",
+  "directories": {
+    "lib": "lib",
+    "dist": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichosick/trkm.git"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && webpack --mode production",
+    "build:watch": "rm -rf ./dist && webpack --mode production --watch"
+  },
+  "dependencies": {
+    "@trkm/http-cookies-ts": "^0.1.1",
+    "@trkm/object-json-path-ts": "^0.1.1"
+  }
+}

@@ -20,6 +20,14 @@ export interface Options {
 }
 
 /**
+ * Method signature for cookiesToObj.
+ */
+export type cookiesToObjSignature = (
+  cookies: string,
+  options?: Options
+) => ObjStrKeyVal;
+
+/**
  * Converts a cookie string as described by https://developer.mozilla.org/en-US/docs/web/api/document/cookie
  * to an object. WARNING: Cookie names are case sensitive along with javascript
  * object properties.
@@ -30,7 +38,7 @@ export interface Options {
  * cookies string and value is the value of the cookie.
  * 
  */
-export const cookiesToObj = (
+export const cookiesToObj: cookiesToObjSignature = (
   cookies: string,
   options?: Options
 ): ObjStrKeyVal => {
