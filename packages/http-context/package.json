@@ -27,7 +27,8 @@
     "dist"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -40,5 +41,6 @@
   "dependencies": {
     "@trkm/http-cookies-ts": "^0.1.2",
     "@trkm/object-json-path-ts": "^0.1.2"
-  }
+  },
+  "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711"
 }
