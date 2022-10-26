@@ -58,7 +58,7 @@ yarn publish:all
 
 ```bash
 # Add a new project
-yarn lerna:create {@name/new-package-name}  # Example yarn lerna:create @trkm/wp-context
+yarn lerna:create {@name/new-package-name}  # Example yarn lerna:create @trkm/http-context
 
 # Link it to other projects
 yarn add {@name/existing-module} --scope={@name/new-package-name} # yarn lerna add @trkm/http-cookies-ts --scope=@trkm/http-context
@@ -71,7 +71,7 @@ cd ./packages/{package-name}
 yarn lerna add {package-name-linking-to}
 
 # example
-cd ./package/wp-context
+cd ./package/http-context
 yarn lerna add object-json-path-ts
 ```
 

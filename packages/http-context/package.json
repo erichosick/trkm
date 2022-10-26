@@ -10,7 +10,7 @@
     "html context"
   ],
   "author": "Eric Hosick <erichosick@gmail.com>",
-  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/wp-context",
+  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/http-context",
   "bugs": {
     "url": "https://github.com/erichosick/trkm/issues",
     "email": "erichosick@gmail.com"

@@ -26,5 +26,9 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichosick/trkm.git"
+  },
   "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711"
 }
