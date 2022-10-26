@@ -20,7 +20,7 @@ export type JsonPathValues = JsonPathValue[];
 /**
  * Adds a value to an object given a JSONPath.
  *
- * If the path provided in jsonPath doesn't exist in the jsonObject, then the
+ * If the path provided in jsonPath doesn't exist in the jsObj, then the
  * object is built out. The final path element is then created setting it's
  * value to value. If a jsonPath resolves to a primitive (string, number, array)
  * etc. when there is already an object, an error is thrown. For example, if
@@ -32,16 +32,16 @@ export type JsonPathValues = JsonPathValue[];
  *  * We currently only support a very simplified jsonPath of '.' scope only.
  *    Example: user.age
  *
- * @param jsonObject The object we're adding the value to.
+ * @param jsObj The object we're adding the value to.
  * @param jsonPathValues An object of, or array of, JsonPathValues. Every
- * path/value pairing is used to build out the jsonObject.
+ * path/value pairing is used to build out the jsObj.
  *
  * Example:
  *   const anObject = {};
  *   insertIntoObject(anObject, { path: 'user.age', value: 23 }));
  */
 export const insertIntoObject = (
-  jsonObject: unknown,
+  jsObj: unknown,
   jsonPathValues: JsonPathValue | JsonPathValues,
 ): unknown => {
   // Simplify code logic below
@@ -53,7 +53,7 @@ export const insertIntoObject = (
       throw Error('Path can not be empty.');
     }
     const properties = jsonPath.path.split('.');
-    let current: any = jsonObject;
+    let current: any = jsObj;
     // 1. Build out the object as needed up to the last
     // property (properties.length - 1)
     for (let i = 0; i < (properties.length - 1); i += 1) {
@@ -71,21 +71,21 @@ export const insertIntoObject = (
     current[properties[properties.length - 1]] = jsonPath.value;
   }
 
-  return jsonObject;
+  return jsObj;
 };
 
 /**
  * Returns a value from an object given a JSON path.
- * @param jsonObject The object we're reading the values from.
+ * @param jsObj The object we're reading the values from.
  * @param path The JSONpath to the value.
  * @returns The value found from the object.
  */
 export const getFromObject = (
-  jsonObject: unknown,
+  jsObj: unknown,
   path: string,
 ) => {
   const properties = path.split('.');
-  let current: any = jsonObject;
+  let current: any = jsObj;
   const currentPath = [];
   for (let i = 0; i < (properties.length - 1); i += 1) {
     const name = properties[i];
