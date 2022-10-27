@@ -11,12 +11,12 @@ Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/a
 
 ### `cookiesToObj`
 
-Converts a cookie string, often returned by document.cookie ([more info](https://developer.mozilla.org/en-US/docs/web/api/document/cookie)) to an object. WARNING: Cookie names are case sensitive along with javascript object properties
+Converts a string of the format `keyName01=keyValue01;keyName02=keyValue02` (the key/value pair format returned by document.cookie) into an object whose properties are the `keyName` and value is the `keyValue`. WARNING: Key names are case sensitive along with javascript object properties. See [Http Cookies](https://developer.mozilla.org/en-US/docs/web/api/document/cookie) for details.
 
-* @param cookies - A string containing zero or more cookies as defined by [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie).
-* @param options - Options provided to the cookiesToObj
-  **alter**: When provided, enables converting a cookie name before using the cookie name as the object property name.
-* @returns - An object whose properties are the properties of all cookies in the cookies string and value is the value of the cookie.
+* @param keyValueString - A string containing zero or more key/value pairs of the format `keyName01=keyValue01;`.
+* @param options:
+  * mutateProperty - Lambda with a function signature of `(propertyName: string) => string;` used to convert the key name before using the key name as an object property.
+* @returns - An object whose properties are the properties of all keys in the keyValueString and values are the value of the keyValueString.
 
 ```typescript
 import { cookiesToObj } from '@trkm/http-cookies-ts';
@@ -24,15 +24,14 @@ import { cookiesToObj } from '@trkm/http-cookies-ts';
 const cookies = cookiesToObj(document.cookie);
 
 // convert cookie name to lowercase
-
-const toLowerCase = (input: string) => {
+const toLowerCase = (input: string):string => {
   return input.toLowerCase();
 }
 
 const cookies2 = cookiesToObj(
   'ENABLED=true;updated=false;',
   {
-    alter: toLowerCase
+    mutateProperty: toLowerCase,
   }
 );
 

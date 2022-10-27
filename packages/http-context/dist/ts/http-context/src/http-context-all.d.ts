@@ -1,7 +1,7 @@
-import { ObjStrKeyVal } from '@trkm/http-cookies-ts';
+import { ObjectKeyStrValueStr } from '@trkm/types';
 export interface ContextAll {
-    cookies: ObjStrKeyVal;
-    urlParams: ObjStrKeyVal;
+    cookies: ObjectKeyStrValueStr;
+    urlParams: ObjectKeyStrValueStr;
 }
 export declare type httpContextAllSignature = () => ContextAll;
 declare const httpContextAll: httpContextAllSignature;

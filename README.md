@@ -2,8 +2,9 @@
 
 A [Lerna](https://lerna.js.org/) mono repo which contains:
 
-* [object-json-path-ts](./packages/object-json-path-ts/README.md) - Using a small subset of [JSONpath](https://jsontostring.com/jsonpath/) features, object-json-path-ts gets or sets a value on a javascript object.
-* [http-cookies-ts](./packages/http-cookies-ts/README.md) - Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie) (document.cookie) to a javascript object: the cookie name becomes the object property name.
+* [@trkm/http-cookies-ts](./packages/http-cookies-ts/README.md) - Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie) (document.cookie) to a javascript object: the cookie name becomes the object property name.
+* [@trkm/object-json-path-ts](./packages/object-json-path-ts/README.md) - Using a small subset of [JSONpath](https://jsontostring.com/jsonpath/) features, object-json-path-ts gets or sets a value on a javascript object.
+* [@trkm/types](./packages/types/README.md) - Types shared between @trkm packages.
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
@@ -61,18 +62,15 @@ yarn publish:all
 yarn lerna:create {@name/new-package-name}  # Example yarn lerna:create @trkm/http-context
 
 # Link it to other projects
-yarn add {@name/existing-module} --scope={@name/new-package-name} # yarn lerna add @trkm/http-cookies-ts --scope=@trkm/http-context
+yarn add {@name/existing-module} --scope={@name/new-package-name}
 ```
 
 ### Linking To Another Project
 
 ```bash
-cd ./packages/{package-name}
-yarn lerna add {package-name-linking-to}
-
+yarn lerna add {@name/existing-module} --scope={@name/new-package-name}
 # example
-cd ./package/http-context
-yarn lerna add object-json-path-ts
+yarn lerna add @trkm/http-cookies-ts --scope=@trkm/http-context
 ```
 
 # TODO

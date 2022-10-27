@@ -1,15 +1,14 @@
-import { uuidGenerateSignature } from './uuid-generate';
-import { cookiesToObjSignature } from '@trkm/http-cookies-ts';
+import { UuidGenerateSignature } from '@trkm/http-uuid-generate-v4-ts';
+import { DataToObjectSignature } from '@trkm/types';
 import { insertIntoObjectInterface } from '@trkm/object-json-path-ts';
 import { httpContextAllSignature } from './http-context-all';
-import { urlParamsSignature } from './url-params';
 export interface Trkm {
-    uuidGenerate: uuidGenerateSignature;
+    uuidGenerateV4: UuidGenerateSignature;
     insertIntoObject: insertIntoObjectInterface;
     context: {
         all: httpContextAllSignature;
-        cookies: cookiesToObjSignature;
-        urlParams: urlParamsSignature;
+        cookies: DataToObjectSignature;
+        urlParams: DataToObjectSignature;
     };
 }
 declare module globalThis {

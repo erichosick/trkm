@@ -1,6 +1,5 @@
-
 import { validate } from 'uuid';
-import uuidGenerate from '../src/uuid-generate';
+import uuidGenerateV4 from '../src/index';
 
 describe('wp-context uuid', () => {
   afterEach(() => {
@@ -10,7 +9,7 @@ describe('wp-context uuid', () => {
   it('should generate a uuid', () => {
     const revokeObjectURLMocked = jest.fn();
     window.URL.revokeObjectURL = revokeObjectURLMocked;
-    const uuid = uuidGenerate();
+    const uuid = uuidGenerateV4();
     expect(validate(uuid)).toEqual(true);
     expect(revokeObjectURLMocked).toBeCalled()
   });

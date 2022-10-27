@@ -13,7 +13,7 @@ describe('http-context uuid', () => {
 
   it('should expose trkm.uuidGenerate', () => {
     window.URL.revokeObjectURL = revokeObjectURLMocked;
-    const uuid = globalThis.trkm.uuidGenerate();
+    const uuid = globalThis.trkm.uuidGenerateV4();
     expect(validate(uuid)).toEqual(true);
     expect(revokeObjectURLMocked).toBeCalled()
   });

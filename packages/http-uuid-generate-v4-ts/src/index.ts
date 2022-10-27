@@ -1,16 +1,14 @@
-
 /**
  * Method signature of our default function
  */
-export type uuidGenerateSignature = () => string;
+export type UuidGenerateSignature = () => string;
 
 /**
- * Generates a uuid using URL.createObjectURL
+ * Generates a Version 4 uuid using URL.createObjectURL
  * @returns A string uuid.
  */
-const uuidGenerate: uuidGenerateSignature = (): string => {
-  // NOTE: We tried crypto.randomUUID() but it doesn't always generate a valid
-  // uuid. f5dd429f-18af-4b01-b2b7889bdb28b504 is not valid but generated.
+const uuidGenerateV4: UuidGenerateSignature = (): string => {
+  // NOTE: The crypto.randomUUID() doesn't always generate a valid uuid.
 
   // *Generates a uuid using createObjectUrl. The uuid returned is a string. Use
   //* the <https://www.npmjs.com/package/uuid> library to convert the string to a
@@ -33,4 +31,4 @@ const uuidGenerate: uuidGenerateSignature = (): string => {
 
 }
 
-export default uuidGenerate;
+export default uuidGenerateV4;

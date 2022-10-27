@@ -1,56 +1,41 @@
 // THOUGHTS: Log a warning if invalid cookies are ignored. Perhaps write a
 // similar function that can provide in-depth debug information.
 
-/**
- * Defining an object interface with string keys and string values.
- * Example:
- * {
- *   "userName": "User",
- *   "userAge": "42",
- * }
- */
-export interface ObjStrKeyVal {
-  [key: string]: string
-}
-
-export type alterName = (info: string) => string;
-
-export interface Options {
-  alter?: alterName
-}
+import {
+  DataToObjectOptions,
+  DataToObjectSignature,
+  ObjectKeyStrValueStr
+} from '@trkm/types';
 
 /**
- * Method signature for cookiesToObj.
+ * Converts a string of the format 'keyName01=keyValue01;keyName02=keyValue02`
+ * (the key/value pair format returned by document.cookie) to an object
+ * whose properties are the `keyName` and value is the `keyValue`.
+ * WARNING: Key names are case sensitive along with javascript object
+ * properties. See [Http Cookies](https://developer.mozilla.org/en-US/docs/web/api/document/cookie)
+ * for details.
+ * @param keyValueString - A string containing zero or more key/value pairs of
+ *   the format `keyName01=keyValue01;keyName02=keyValue02`
+ * @param options:
+ *   mutateProperty - Lambda with a function signature of
+ *    `(propertyName: string) => string;` used to convert the key name before
+ *     using the key name as an object property.
+ * @returns - An object whose properties are the properties of all keys in the
+ *            keyValueString and values are the value of the keyValueString.
  */
-export type cookiesToObjSignature = (
-  cookies: string,
-  options?: Options
-) => ObjStrKeyVal;
-
-/**
- * Converts a cookie string as described by https://developer.mozilla.org/en-US/docs/web/api/document/cookie
- * to an object. WARNING: Cookie names are case sensitive along with javascript
- * object properties.
- * @param cookies A string containing zero or more cookies.
- * @param alter - When provided, enables converting a cookie name before using
- * the cookie name as the object property name.
- * @returns An object whose properties are the properties of all cookies in the 
- * cookies string and value is the value of the cookie.
- * 
- */
-export const cookiesToObj: cookiesToObjSignature = (
-  cookies: string,
-  options?: Options
-): ObjStrKeyVal => {
-  const result: ObjStrKeyVal = {};
-  for (let cookie of cookies.split(';')) {
+export const cookiesToObj: DataToObjectSignature = (
+  keyValueString: string,
+  options?: DataToObjectOptions
+): ObjectKeyStrValueStr => {
+  const result: ObjectKeyStrValueStr = {};
+  for (let cookie of keyValueString.split(';')) {
     // cases where the cookie is empty. For example when cookies = ';;;;'
     if (cookie !== '') {
       const cookieParts = cookie.split('=');
       if (cookieParts.length === 2) {
         const decodedPropertyName = decodeURIComponent(cookieParts[0]);
-        const finalPropertyName = (options?.alter ?
-          options.alter(decodedPropertyName) : decodedPropertyName).trim();
+        const finalPropertyName = (options?.mutateProperty ?
+          options.mutateProperty(decodedPropertyName) : decodedPropertyName).trim();
         // NOTE: It should not be possible for document.cookie to have more than
         // one cookie of the same name unless we are converting the property names
         // to lower case.

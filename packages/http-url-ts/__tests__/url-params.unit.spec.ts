@@ -1,12 +1,12 @@
-import urlParams from '../src/url-params';
+import { urlParamsToObj } from '../src/index';
 
 const toLowerCase = (input: string) => {
   return input.toLowerCase();
 }
-describe('urlParams', () => {
+describe('urlParamsToObj', () => {
   describe('url params', () => {
     it('should generate an object based on parameters', () => {
-      const paramsObj = urlParams('?q=some+thing&anotherParam=some+value');
+      const paramsObj = urlParamsToObj('?q=some+thing&anotherParam=some+value');
       expect(paramsObj).toEqual({
         q: 'some thing',
         anotherParam: 'some value',
@@ -15,7 +15,7 @@ describe('urlParams', () => {
     });
 
     it('should generate an object cleaning up the parameter name', () => {
-      const paramsObj = urlParams('?noSpaces=some+thing&+hadSpaces+=spaces');
+      const paramsObj = urlParamsToObj('?noSpaces=some+thing&+hadSpaces+=spaces');
       expect(paramsObj).toEqual({
         noSpaces: 'some thing',
         hadSpaces: 'spaces',
@@ -24,7 +24,7 @@ describe('urlParams', () => {
     });
 
     it('should trim parameters with spaces/tabs/etc. at the start or end of the cookie parameter name.', () => {
-      const paramsObj = urlParams('?noSpaces=some+thing&+hadSpaces+=spaces');
+      const paramsObj = urlParamsToObj('?noSpaces=some+thing&+hadSpaces+=spaces');
       expect(paramsObj).toEqual({
         noSpaces: 'some thing',
         hadSpaces: 'spaces',
@@ -33,7 +33,7 @@ describe('urlParams', () => {
     });
 
     it('should support converting property names to lower case.', () => {
-      const cookieObj = urlParams('?UPPER=case', { alter: toLowerCase });
+      const cookieObj = urlParamsToObj('?UPPER=case', { mutateProperty: toLowerCase });
       expect(cookieObj).toEqual({ upper: 'case' })
     });
 
@@ -43,10 +43,10 @@ describe('urlParams', () => {
   describe('invalid scenarios', () => {
 
     it('should throw an error when the two cookies have the same name', () => {
-      expect(() => urlParams('?duplicate=value&duplicate=value'))
+      expect(() => urlParamsToObj('?duplicate=value&duplicate=value'))
         .toThrow('URL search parameters had more than one search parameter with a parameter named \'duplicate\'.');
 
-      expect(() => urlParams('?SIMPLE=value&simple=value', { alter: toLowerCase }))
+      expect(() => urlParamsToObj('?SIMPLE=value&simple=value', { mutateProperty: toLowerCase }))
         .toThrow('URL search parameters had more than one search parameter with a parameter named \'simple\'.');
 
     });
