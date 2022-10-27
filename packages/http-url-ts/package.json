@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-url-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Converts url parameters into a javascript object: the parameter name becomes the object property name.",
   "keywords": [
     "typescript",
