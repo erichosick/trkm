@@ -34,13 +34,24 @@ describe('http-context uuid', () => {
   });
 
   it('should expose trkm.context.all', () => {
+    // mock window.location.search
+    global.window = Object.create(window);
+    const search = "?a=search+parameter";
+    Object.defineProperty(window, 'location', {
+      value: {
+        search: search
+      }
+    });
+
     document.cookie = 'haveA=final_cookie';
     const testObj = globalThis.trkm.context.all();
     expect(testObj).toEqual({
       cookies: {
         haveA: 'final_cookie',
       },
+      urlParams: {
+        a: 'search parameter',
+      },
     })
   });
-
 });

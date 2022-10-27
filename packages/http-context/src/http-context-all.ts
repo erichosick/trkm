@@ -1,9 +1,11 @@
 import { ObjStrKeyVal } from '@trkm/http-cookies-ts';
 import { cookiesToObj } from '@trkm/http-cookies-ts';
+import urlParams from './url-params';
 
 
 export interface ContextAll {
-  cookies: ObjStrKeyVal
+  cookies: ObjStrKeyVal,
+  urlParams: ObjStrKeyVal,
 }
 
 export type httpContextAllSignature = () => ContextAll;
@@ -15,6 +17,7 @@ export type httpContextAllSignature = () => ContextAll;
 const httpContextAll: httpContextAllSignature = (): ContextAll => {
   return {
     cookies: cookiesToObj(document.cookie),
+    urlParams: urlParams(window.location.search),
   }
 }
 
