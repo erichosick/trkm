@@ -1,9 +1,10 @@
 import { ObjectKeyStrValueStr } from '@trkm/types';
+import { DocumentProperties } from './http-document';
 export interface ContextAll {
     cookies: ObjectKeyStrValueStr;
-    urlParams: ObjectKeyStrValueStr;
+    document: DocumentProperties;
 }
-export declare type httpContextAllSignature = () => ContextAll;
-declare const httpContextAll: httpContextAllSignature;
+export declare type HttpContextAllSignature = () => ContextAll;
+declare const httpContextAll: HttpContextAllSignature;
 export default httpContextAll;
 //# sourceMappingURL=http-context-all.d.ts.map

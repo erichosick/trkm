@@ -18,39 +18,68 @@ describe('http-context uuid', () => {
     expect(revokeObjectURLMocked).toBeCalled()
   });
 
-  it('should expose trkm.insertIntoObject', () => {
-    const testObj = {};
-    globalThis.trkm.insertIntoObject(testObj, { path: 'some', value: 'value' });
-    expect(testObj).toEqual({
-      some: 'value',
-    })
-  });
+  // it('should expose trkm.insertIntoObject', () => {
+  //   const testObj = {};
+  //   globalThis.trkm.insertIntoObject(testObj, { path: 'some', value: 'value' });
+  //   expect(testObj).toEqual({
+  //     some: 'value',
+  //   })
+  // });
 
-  it('should expose trkm.context.cookies', () => {
-    const testObj = globalThis.trkm.context.cookies('haveA=cookie');
-    expect(testObj).toEqual({
-      haveA: 'cookie',
-    })
-  });
+  // it('should expose trkm.context.cookies', () => {
+  //   const testObj = globalThis.trkm.context.cookies('haveA=cookie');
+  //   expect(testObj).toEqual({
+  //     haveA: 'cookie',
+  //   })
+  // });
 
-  it('should expose trkm.context.all', () => {
-    // mock window.location.search
+  it('should expose trkm.context', () => {
+    // mock window.location
     global.window = Object.create(window);
-    const search = "?a=search+parameter";
     Object.defineProperty(window, 'location', {
       value: {
-        search: search
+        hash: '#ahash',
+        host: 'localhost',
+        hostname: 'localhost',
+        href: 'http://localhost/',
+        origin: 'http://localhost',
+        pathname: '/',
+        port: '34',
+        protocol: 'http:',
+        search: '?a=search+parameter&another=parameter',
       }
     });
 
     document.cookie = 'haveA=final_cookie';
-    const testObj = globalThis.trkm.context.all();
+    const testObj = globalThis.trkm.context();
     expect(testObj).toEqual({
       cookies: {
         haveA: 'final_cookie',
       },
-      urlParams: {
-        a: 'search parameter',
+      document: {
+        browser: {
+          cookieEnabled: true,
+          platform: '',
+          userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/20.0.1',
+        },
+        language: 'en-US',
+        referrer: '',
+        title: '',
+        url: {
+          hash: '#ahash',
+          host: 'localhost',
+          hostname: 'localhost',
+          href: 'http://localhost/',
+          origin: 'http://localhost',
+          pathname: '/',
+          port: '34',
+          protocol: 'http:',
+          search: '?a=search+parameter&another=parameter',
+          urlParams: {
+            a: 'search parameter',
+            another: 'parameter',
+          },
+        },
       },
     })
   });

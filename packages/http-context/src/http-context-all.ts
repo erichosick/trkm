@@ -1,23 +1,22 @@
 import { ObjectKeyStrValueStr } from '@trkm/types';
 import { cookiesToObj } from '@trkm/http-cookies-ts';
-import { urlParamsToObj } from '@trkm/http-url-ts';
-
+import httpDocument, { DocumentProperties } from './http-document';
 
 export interface ContextAll {
   cookies: ObjectKeyStrValueStr,
-  urlParams: ObjectKeyStrValueStr,
+  document: DocumentProperties
 }
 
-export type httpContextAllSignature = () => ContextAll;
+export type HttpContextAllSignature = () => ContextAll;
 
 /**
  * Generates a uuid using URL.createObjectURL
  * @returns A string uuid.
  */
-const httpContextAll: httpContextAllSignature = (): ContextAll => {
+const httpContextAll: HttpContextAllSignature = (): ContextAll => {
   return {
     cookies: cookiesToObj(document.cookie),
-    urlParams: urlParamsToObj(window.location.search),
+    document: httpDocument(),
   }
 }
 
