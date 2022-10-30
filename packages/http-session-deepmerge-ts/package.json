@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-session-deepmerge-ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stores a page's context in a session: merging existing session context as needed.",
   "keywords": [
     "typescript",
