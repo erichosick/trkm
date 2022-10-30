@@ -41,3 +41,9 @@ export type DataToObjectSignature = (
   keyValueString: string,
   options?: DataToObjectOptions
 ) => ObjectKeyStrValueStr;
+
+
+/**
+ * Context session id used by tracking madness.
+ */
+export const WP_CONTEXT_SESSION_KEY = 'tm_context_session';
