@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-context",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Pull values from different sources on a webpage (cookies, heading, web page parameters, etc.) and place them in a json object for later processing.",
   "keywords": [
     "javascript",
@@ -39,7 +39,7 @@
     "build:watch": "rm -rf ./dist && webpack --mode production --watch"
   },
   "dependencies": {
-    "@trkm/http-cookies-ts": "^0.2.0",
+    "@trkm/http-cookies-ts": "^0.2.1",
     "@trkm/http-url-ts": "^1.0.0",
     "@trkm/http-uuid-generate-v4-ts": "^0.0.1",
     "@trkm/object-json-path-ts": "^0.1.4"
