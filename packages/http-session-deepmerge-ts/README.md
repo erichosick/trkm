@@ -1,4 +1,4 @@
-# **@trkm/http-session-deepmerge**
+# **@trkm/http-session-deepmerge-ts**
 
 Stores a page's context in a session: deep merging existing session context as needed.
 
@@ -9,7 +9,7 @@ Stores a page's context in a session: deep merging existing session context as n
 
 ## Usage
 
-As a user navigates between pages, some context may be lost. Specifically the initial http parameters passed on a given landing page. The intent of the `http-session-deepmerge` is to maintain the initial landing page context as a user navigates throughout a website. This also means that any existing context may be overwritten when navigation to a new page. Keep this in mind when using `http-session-deepmerge`.
+As a user navigates between pages, some context may be lost. Specifically the initial http parameters passed on a given landing page. The intent of the `http-session-deepmerge-ts` is to maintain the initial landing page context as a user navigates throughout a website. This also means that any existing context may be overwritten when navigation to a new page. Keep this in mind when using `http-session-deepmerge-ts`.
 
 ### **SessionInit**
 
@@ -18,7 +18,7 @@ Initializes or resets the current website session: clearing out any existing ses
 * @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
-import { sessionInit } from '@trkm/http-session-deepmerge';
+import { sessionInit } from '@trkm/http-session-deepmerge-ts';
 
 // uses the default session key defined in WP_CONTEXT_SESSION_KEY
 sessionInit();
@@ -34,7 +34,7 @@ Returns the current webpage session.
 * @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
-import { sessionGet } from '@trkm/http-session-deepmerge';
+import { sessionGet } from '@trkm/http-session-deepmerge-ts';
 
 // uses the default session key defined in WP_CONTEXT_SESSION_KEY
 sessionGet();
@@ -51,7 +51,7 @@ DeepMerges new session data with existing session data.
 * @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
-import { sessionGet, sessionMerge } from '@trkm/http-session-deepmerge';
+import { sessionGet, sessionMerge } from '@trkm/http-session-deepmerge-ts';
 
 // uses the default session key defined in WP_CONTEXT_SESSION_KEY
 sessionMerge({selectedItem: 'RJ4454', readyToPay: false });
