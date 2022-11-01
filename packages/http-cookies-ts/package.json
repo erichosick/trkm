@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-cookies-ts",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/api/document/cookie) (document.cookie) to a javascript object: the cookie name becomes the object property name.",
   "keywords": [
     "javascript",
@@ -32,6 +32,6 @@
   },
   "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711",
   "dependencies": {
-    "@trkm/types": "^0.0.2"
+    "@trkm/types": "^0.1.0"
   }
 }

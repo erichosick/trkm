@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-context-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Aggregates information about a current webpages's context, such as cookies and url parameters, into a single object for easy consumption.",
   "keywords": [
     "javascript",
@@ -33,8 +33,8 @@
     "url": "git+https://github.com/erichosick/trkm.git"
   },
   "dependencies": {
-    "@trkm/http-cookies-ts": "^0.2.1",
+    "@trkm/http-cookies-ts": "^0.3.0",
     "@trkm/http-url-ts": "^0.1.1",
-    "@trkm/types": "^0.0.2"
+    "@trkm/types": "^0.1.0"
   }
 }

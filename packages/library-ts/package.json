@@ -1,6 +1,6 @@
 {
   "name": "@trkm/library-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Tracking madness library",
   "keywords": [
     "Tracking madness"
@@ -29,8 +29,8 @@
     "url": "git+https://github.com/erichosick/trkm.git"
   },
   "dependencies": {
-    "@trkm/http-context-ts": "^0.0.0",
-    "@trkm/http-session-deepmerge-ts": "^0.0.2",
+    "@trkm/http-context-ts": "^0.1.0",
+    "@trkm/http-session-deepmerge-ts": "^0.1.0",
     "@trkm/http-uuid-generate-v4-ts": "^0.0.1",
     "@trkm/object-json-path-ts": "^0.1.4"
   }

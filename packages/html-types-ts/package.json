@@ -1,6 +1,6 @@
 {
   "name": "@trkm/html-types-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Typescript type definitions for html elements used by different trkm libraries.",
   "keywords": [
     "typescript",
