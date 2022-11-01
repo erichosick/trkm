@@ -15,7 +15,7 @@ As a user navigates between pages, some context may be lost. Specifically the in
 
 Initializes or resets the current website session: clearing out any existing session information.
 
-* @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
+* @param sessionKey (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
 import { sessionInit } from '@trkm/http-session-deepmerge-ts';
@@ -31,7 +31,7 @@ sessionInit('special_session_data_key');
 
 Returns the current webpage session.
 
-* @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
+* @param sessionKey (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
 import { sessionGet } from '@trkm/http-session-deepmerge-ts';
@@ -48,7 +48,7 @@ sessionGet('special_session_data_key');
 DeepMerges new session data with existing session data.
 
 * @param context The configuration we are storing in the session.
-* @param session_key (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
+* @param sessionKey (optional) - When provided, a custom session storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types is used.
 
 ```typescript
 import { sessionGet, sessionMerge } from '@trkm/http-session-deepmerge-ts';

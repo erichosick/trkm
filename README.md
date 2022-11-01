@@ -62,7 +62,7 @@ yarn publish:all
 yarn lerna:create {@name/new-package-name}  # Example yarn lerna:create @trkm/http-context
 
 # Link it to other projects
-yarn add {@name/existing-module} --scope={@name/new-package-name}
+yarn lerna add {@name/existing-module} --scope={@name/new-package-name}
 ```
 
 ### Linking To Another Project

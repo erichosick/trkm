@@ -53,7 +53,6 @@ describe('session (cookiesToObj)', () => {
       };
 
       const finalContext = merge(initialContext, newContext);
-
       sessionMerge(initialContext)
       expect(sessionGet()).toEqual(initialContext);
       sessionMerge(newContext);

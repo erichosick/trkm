@@ -1,45 +1,60 @@
 import { WP_CONTEXT_SESSION_KEY } from '@trkm/types';
 import merge from 'ts-deepmerge';
 
-/**
- * Initializes or resets the current website session: clearing out any existing session information.
- * @param session_key (optional) - When provided, a custom session
- * storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types
- * is used.
- */
-export const sessionInit = (
-  session_key: string = WP_CONTEXT_SESSION_KEY
-): void => {
-  sessionStorage.setItem(session_key, JSON.stringify({}));
-};
+
+export type SessionInitSignature = (
+  sessionKey?: string
+) => void;
 
 /**
- * Returns the current webpage session.
- * @param session_key (optional) - When provided, a custom session
+ * Initializes or resets the current website session: clearing out any existing session information.
+ * @param sessionKey (optional) - When provided, a custom session
  * storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types
  * is used.
  */
-export const sessionGet = (
-  session_key: string = WP_CONTEXT_SESSION_KEY
+export const sessionInit: SessionInitSignature = (
+  sessionKey: string = WP_CONTEXT_SESSION_KEY
+): void => {
+  sessionStorage.setItem(sessionKey, JSON.stringify({}));
+};
+
+
+export type SessionGetSignature = (
+  sessionKey?: string
+) => object;
+/**
+ * Returns the current webpage session.
+ * @param sessionKey (optional) - When provided, a custom session
+ * storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types
+ * is used.
+ */
+export const sessionGet: SessionGetSignature = (
+  sessionKey: string = WP_CONTEXT_SESSION_KEY
 ): object => {
-  const context = sessionStorage.getItem(session_key);
+  const context = sessionStorage.getItem(sessionKey);
   return context ? JSON.parse(context) : {};
 };
+
+
+export type SessionMergeSignature = (
+  context: object,
+  sessionKey?: string
+) => object;
 
 /**
  * DeepMerges new session data with existing session data.
  * @param context The configuration we are storing in the session.
- * @param session_key (optional) - When provided, a custom session
+ * @param sessionKey (optional) - When provided, a custom session
  * storage key is used. By default WP_CONTEXT_SESSION_KEY defined in @trkm/types
  * is used.
  */
-export const sessionMerge = (
+export const sessionMerge: SessionMergeSignature = (
   context: object,
-  session_key: string = WP_CONTEXT_SESSION_KEY
+  sessionKey: string = WP_CONTEXT_SESSION_KEY
 ): object => {
-  const mergedContext = merge(sessionGet(session_key), context);
+  const mergedContext = merge(sessionGet(sessionKey), context);
   sessionStorage.setItem(
-    session_key,
+    sessionKey,
     JSON.stringify(mergedContext)
   );
   return mergedContext;

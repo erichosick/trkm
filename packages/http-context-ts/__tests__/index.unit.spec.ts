@@ -1,37 +1,7 @@
-import globalThis from '../src/globals';
-
 // importing index builds globalThis.trkm
-import '../src/index';
-import { validate } from 'uuid';
+import { wpContext } from '../src/index';
 
 describe('http-context uuid', () => {
-  const revokeObjectURLMocked = jest.fn();
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should expose trkm.uuidGenerate', () => {
-    window.URL.revokeObjectURL = revokeObjectURLMocked;
-    const uuid = globalThis.trkm.uuidGenerateV4();
-    expect(validate(uuid)).toEqual(true);
-    expect(revokeObjectURLMocked).toBeCalled()
-  });
-
-  // it('should expose trkm.insertIntoObject', () => {
-  //   const testObj = {};
-  //   globalThis.trkm.insertIntoObject(testObj, { path: 'some', value: 'value' });
-  //   expect(testObj).toEqual({
-  //     some: 'value',
-  //   })
-  // });
-
-  // it('should expose trkm.context.cookies', () => {
-  //   const testObj = globalThis.trkm.context.cookies('haveA=cookie');
-  //   expect(testObj).toEqual({
-  //     haveA: 'cookie',
-  //   })
-  // });
 
   it('should expose trkm.context', () => {
     // mock window.location
@@ -51,7 +21,7 @@ describe('http-context uuid', () => {
     });
 
     document.cookie = 'haveA=final_cookie';
-    const testObj = globalThis.trkm.context();
+    const testObj = wpContext();
     expect(testObj).toEqual({
       cookies: {
         haveA: 'final_cookie',
@@ -60,7 +30,7 @@ describe('http-context uuid', () => {
         browser: {
           cookieEnabled: true,
           platform: '',
-          userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/20.0.1',
+          userAgent: 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/20.0.2',
         },
         language: 'en-US',
         referrer: '',

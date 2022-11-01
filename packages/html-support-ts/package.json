@@ -1,0 +1,34 @@
+{
+  "name": "@trkm/html-support-ts",
+  "version": "0.0.0",
+  "description": "A very small typescript library used to find html elements.",
+  "keywords": [
+    "typescript",
+    "form",
+    "html",
+    "trkm"
+  ],
+  "author": "Eric Hosick <erichosick@gmail.com>",
+  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/html-support-ts",
+  "bugs": {
+    "url": "https://github.com/erichosick/trkm/issues",
+    "email": "erichosick@gmail.com"
+  },
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichosick/trkm.git"
+  }
+}

@@ -5,6 +5,7 @@ import type { Config } from 'jest';
 const unitTestConfig: Config = {
   preset: 'ts-jest',
   setupFiles: [
+    './scripts/jest-setup.ts',
     'jsdom-worker', // Mocks URL.createObject
   ],
   testEnvironment: 'jsdom',

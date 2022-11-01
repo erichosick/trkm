@@ -1,3 +1,12 @@
+// -----------------------------------------------------------------------------
+
+/**
+ * Context session id used by tracking madness.
+ */
+export const WP_CONTEXT_SESSION_KEY = 'tm_context_session';
+
+// -----------------------------------------------------------------------------
+
 /**
  * Defining an object interface with string keys and string values.
  * Example:
@@ -9,6 +18,20 @@
 export interface ObjectKeyStrValueStr {
   [key: string]: string
 }
+
+/**
+ * Defining an object interface with string keys and unknown values.
+ * Example:
+ * {
+ *   "userName": "User",
+ *   "userAge": "42",
+ * }
+ */
+export interface ObjectKeyStrValueUnk {
+  [key: string]: unknown
+}
+
+// -----------------------------------------------------------------------------
 
 /**
  * The method signature used to take alter a property name. An example would
@@ -41,9 +64,3 @@ export type DataToObjectSignature = (
   keyValueString: string,
   options?: DataToObjectOptions
 ) => ObjectKeyStrValueStr;
-
-
-/**
- * Context session id used by tracking madness.
- */
-export const WP_CONTEXT_SESSION_KEY = 'tm_context_session';

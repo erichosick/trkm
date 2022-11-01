@@ -1,10 +1,5 @@
-// see https://www.w3schools.com/jsref/dom_obj_document.asp
-
 import { urlParamsToObj } from "@trkm/http-url-ts"
 import { ObjectKeyStrValueStr } from "@trkm/types"
-
-// should we put the cookies here?
-
 
 /**
  * Contains detailed information about the http window object url.
@@ -116,10 +111,10 @@ export interface DocumentProperties {
 export type HttpDocumentSignature = () => DocumentProperties;
 
 /**
- * Generates a uuid using URL.createObjectURL
- * @returns A string uuid.
+ * see https://www.w3schools.com/jsref/dom_obj_document.asp
+ * @returns 
  */
-const httpDocument: HttpDocumentSignature = (): DocumentProperties => {
+export const httpDocument: HttpDocumentSignature = (): DocumentProperties => {
   const loc = window.location;
   const nav = navigator;
   return {
@@ -145,5 +140,3 @@ const httpDocument: HttpDocumentSignature = (): DocumentProperties => {
     },
   }
 }
-
-export default httpDocument;

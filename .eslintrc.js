@@ -10,7 +10,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    'eslint-plugin-import'
+    'eslint-plugin-import',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

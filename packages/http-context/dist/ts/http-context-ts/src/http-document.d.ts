@@ -24,6 +24,5 @@ export interface DocumentProperties {
     browser: BrowserDetails;
 }
 export declare type HttpDocumentSignature = () => DocumentProperties;
-declare const httpDocument: HttpDocumentSignature;
-export default httpDocument;
+export declare const httpDocument: HttpDocumentSignature;
 //# sourceMappingURL=http-document.d.ts.map

@@ -3,7 +3,7 @@ import * as Webpack from 'webpack';
 
 // documentation: https://webpack.js.org/configuration/
 const webpackConfig: Webpack.Configuration = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,6 +27,5 @@ const webpackConfig: Webpack.Configuration = {
       },
     ],
   },
-
 };
 export default webpackConfig;
