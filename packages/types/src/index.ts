@@ -19,18 +19,6 @@ export interface ObjectKeyStrValueStr {
   [key: string]: string
 }
 
-/**
- * Defining an object interface with string keys and unknown values.
- * Example:
- * {
- *   "userName": "User",
- *   "userAge": "42",
- * }
- */
-export interface ObjectKeyStrValueUnk {
-  [key: string]: unknown
-}
-
 // -----------------------------------------------------------------------------
 
 /**

@@ -4,6 +4,7 @@ Defines types shared between @trkm organization packages.
 
 ## Features
 
+* **ObjectKeyStrValueStr** - an object interface with a string for keys and string values.
 * 100% typescript.
 
 ## Usage
@@ -37,6 +38,11 @@ Defining a key type on the object enables us to interface with the object's prop
 ### DataToObjectSignature
 
 **DataToObjectSignature** defines a function signature. The intent of the function is to take a string embedded with multiple key/value pairs of strings and convert it to an object. Examples would be url search parameters or web page document cookies.
+
+Example key/value pairs:
+
+* cookie: `name01=value01;name02=value02...`;
+* url params: `?keyName01=keyValue01&keyName02=keyValue02...`;
 
 ## Intent
 
