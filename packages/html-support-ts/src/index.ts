@@ -1,5 +1,15 @@
 import { HtmlElementQuery } from '@trkm/html-types-ts';
 
+/**
+ * Validates the result of searching for an element on a webpage or form. Throws
+ * an error if no element was found or the element returned was not an
+ * HTMLElement.
+ * @param query The query used to locate the element.
+ * @param result The result of running the query.
+ * @param formName In cases where the query was ran against a form, the name of
+ * the form.
+ * @returns The validated element: pulling it from the array.
+ */
 const validateElement = (
   query: HtmlElementQuery,
   result: Element[] | HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element>,
@@ -21,6 +31,12 @@ const validateElement = (
   return result[0];
 }
 
+/**
+ * Queries for an element on a webpage.
+ * @param query An HtmlElementQuery used to find the element.
+ * @returns An HTMLElement if found. Throws an exception if no element was
+ * found.
+ */
 export const getElementFromQuery = (
   query: HtmlElementQuery,
 ): HTMLElement => {
@@ -60,6 +76,12 @@ export const getElementFromQuery = (
   return validateElement(query, result);
 };
 
+/**
+ * Finds a child element on a form using an HtmlElementQuery.
+ * @param form An html form element.
+ * @param query An HtmlElementQuery.
+ * @returns The form element if found. Errors if no element is found.
+ */
 export const getChildElement = (
   form: HTMLFormElement,
   query: HtmlElementQuery
@@ -103,6 +125,15 @@ export const getChildElement = (
 
 export type GetFormSignature = (query?: HtmlElementQuery) => HTMLFormElement;
 
+/**
+ * Returns a form from the webpage using an HtmlElementQuery. An error is thrown
+ * if multiple form are found that match the HtmlElementQuery. If there is only
+ * one form on the page, calling getForm with no parameters will find the one
+ * form on the page.
+ * @param query (HtmlElementQuery): An HtmlElementQuery.
+ * @returns An HTMLFormElement unless the form was not found. Throws an error
+ * if the form is not found.
+ */
 export const getForm: GetFormSignature = (
   query?: HtmlElementQuery
 ): HTMLFormElement => {

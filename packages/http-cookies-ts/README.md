@@ -6,6 +6,7 @@ Converts the [Http cookie format](https://developer.mozilla.org/en-US/docs/web/a
 
 * Leverages `decodeURIComponent` for both cookie name and cookie value.
 * Alter the cookie name before using the name as an object property: lowerPascalCase, lowerCase, etc.
+* 100% typescript
 
 ## Usage
 
