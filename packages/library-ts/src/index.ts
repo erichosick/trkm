@@ -8,6 +8,7 @@ import {
   sessionInit,
   sessionMerge
 } from '@trkm/http-session-deepmerge-ts';
+import formApply from '@trkm/html-form-apply-ts';
 
 const library: TrkmLibrary = {
   uuidGenerateV4,
@@ -17,7 +18,8 @@ const library: TrkmLibrary = {
     get: sessionGet,
     init: sessionInit,
     merge: sessionMerge,
-  }
+  },
+  formApply: formApply
 }
 
 export { TrkmLibrary } from './trkm-library';

@@ -1,7 +1,7 @@
 {
   "name": "@trkm/http-context",
   "version": "0.4.1",
-  "description": "Pull values from different sources on a webpage (cookies, heading, web page parameters, etc.) and place them in a json object for later processing.",
+  "description": "Places the tracking magic library and interface into the globalThis.trkm root.",
   "keywords": [
     "javascript",
     "typescript",

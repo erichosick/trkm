@@ -34,7 +34,7 @@ const formQuery: HtmlElementQuery = {
 };
 
 // Map a given value in an object to a form field.
-const formDestination: FormDestination = {
+const contextToFormMap: FormDestination = {
   formQuery,
   destination: [
     {
@@ -66,7 +66,7 @@ const context = wpContext();
 // }
 
 // Finally, pull values from the context and apply them to the form.
-formApply(formDestination, context);
+formApply(contextToFormMap, context);
 ```
 
 ## Intent

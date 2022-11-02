@@ -11,7 +11,12 @@ export const destinationSet = (
   element.setAttribute('value', value);
 };
 
-const formApply = (
+export type FormApplySignature = (
+  formDestination: FormDestination,
+  context?: object
+) => HTMLFormElement;
+
+const formApply: FormApplySignature = (
   formDestination: FormDestination,
   context?: object
 ): HTMLFormElement => {
