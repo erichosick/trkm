@@ -1,7 +1,7 @@
 {
   "name": "@trkm/html-form-apply-ts",
   "version": "0.2.0",
-  "description": "Given a context, reads from that context and.",
+  "description": "Given an object, pulls values from the object (using getFromObject) and sets the value to a form field found via an HtmlElementQuery.",
   "keywords": [
     "typescript",
     "form",

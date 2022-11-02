@@ -21,11 +21,6 @@ const formApply = (
     ? formDestination.destination : formDestination.destination
       ? [formDestination.destination] : [];
 
-  // const logicRan = Array.isArray(formDestination.destination)
-  // ? 'was array' : formDestination.destination
-  //   ? 'returns singlething in array' : 'returns empty';
-
-
   for (const destination of formDestinationFields) {
     const value = contextGet(context, destination.pullFrom);
     destinationSet(form, destination.destination, value as string);

@@ -93,7 +93,7 @@ export interface InputDestination {
 }
 
 /**
- * An interface which defines a query for forms and associated input
+ * An interface which defines a query for forms and associated output
  * destinations.
  */
 export interface FormDestination {

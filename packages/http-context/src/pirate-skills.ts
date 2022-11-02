@@ -3,19 +3,20 @@
 // import { wpContext } from '@trkm/http-context-ts';
 // import { sessionMerge } from '@trkm/http-session-deepmerge-ts';
 // import formApply from '@trkm/html-form-apply-ts';
-// import { FormDestination } from '@trkm/html-types-ts';
+// import { FormDestination, HtmlElementQuery } from '@trkm/html-types-ts';
 
 // // This is what creating a form query would look like.
 // // Really only required if there is more than one form on a webpage.
-// // const formQuery = {
-// //   tag: 'form',
-// //   name: 'id',
-// //   value: '{some_id_or_value}'
-// // };
+// const formQuery: HtmlElementQuery = {
+//   tag: 'form',
+//   name: 'id',
+//   value: '{some_id_or_value}'
+// };
 
 // // Assumption is that there is only one form per page. If this isn't the case
 // // then we need to provide a form query.
 // const formDestination: FormDestination = {
+//   formQuery,
 //   destination: [
 //     {
 //       pullFrom: {
