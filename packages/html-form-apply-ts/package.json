@@ -1,6 +1,6 @@
 {
   "name": "@trkm/html-form-apply-ts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Given an object, pulls values from the object (using getFromObject) and sets the value to a form field found via an HtmlElementQuery.",
   "keywords": [
     "typescript",
@@ -31,7 +31,7 @@
     "url": "git+https://github.com/erichosick/trkm.git"
   },
   "dependencies": {
-    "@trkm/html-support-ts": "^0.2.0",
-    "@trkm/html-types-ts": "^0.2.0"
+    "@trkm/html-support-ts": "^0.3.0",
+    "@trkm/html-types-ts": "^0.3.0"
   }
 }
