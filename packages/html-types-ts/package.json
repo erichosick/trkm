@@ -1,7 +1,7 @@
 {
   "name": "@trkm/html-types-ts",
   "version": "0.1.0",
-  "description": "Typescript type definitions for html elements used by different trkm libraries.",
+  "description": "Typescript type and interface definitions for html elements used by different trkm libraries.",
   "keywords": [
     "typescript",
     "form",

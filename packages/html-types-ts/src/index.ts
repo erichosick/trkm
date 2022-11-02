@@ -1,9 +1,8 @@
 
 /**
  * An interface which defines properties needed to search for a given html
- * element on a web page.
- * Warning! Only one matching html element should be found. If more than
- * one element is found, an error is thrown.
+ * element on a web page. Warning! Only one matching html element should be
+ *  found. If more than one element is found, an error is thrown.
  * 
  * Searching is done for a (required) element type (form, input, etc.).
  * Querying is then done as follows:
@@ -28,7 +27,7 @@ export interface HtmlElementQuery {
    * such as input, form, id, etc.). The type needs to match the value returned
    * from form.nodeName.
    */
-  tag: string
+  tag?: string
 
   /**
    * Defines the attribute name used to search for the html element.
@@ -105,8 +104,8 @@ export interface FormDestination {
    */
   formQuery?: HtmlElementQuery
 
-  /** One or more form inputs data will write to. */
-  formInput?: InputDestination | InputDestination[]
+  /** One or more destinations where data will be written to. */
+  destination?: InputDestination | InputDestination[]
 
 }
 

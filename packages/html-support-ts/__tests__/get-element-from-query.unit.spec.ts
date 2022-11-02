@@ -2,7 +2,7 @@ import { getElementFromQuery } from '../src/index';
 
 describe('getElementFromQuery', () => {
   describe('tag name only', () => {
-    it('should should return an element by tag name when only one element exits', () => {
+    it('should return an element by tag name when only one element exits', () => {
       document.body.innerHTML = `<input></input>`;
 
       expect(getElementFromQuery({
@@ -18,7 +18,7 @@ describe('getElementFromQuery', () => {
         getElementFromQuery({
           tag: 'input',
         })
-      }).toThrow('Error: More than one html element of tag \'input\' was found.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'input'}.")
     });
 
     it('should error out when no elements by tag name are found.', () => {
@@ -28,12 +28,12 @@ describe('getElementFromQuery', () => {
         getElementFromQuery({
           tag: 'div',
         })
-      }).toThrow('Error: No html element of tag \'div\' was found.')
+      }).toThrow("No HTMLElement found. Query was {'tag':'div'}.")
     })
   });
 
   describe('tag attribute id with no attribute value set (attribute value not required)', () => {
-    it('should should return an element by tag name when only one element exits', () => {
+    it('should return an element by tag name when only one element exits', () => {
       document.body.innerHTML = `<input></input>`;
 
       expect(getElementFromQuery({
@@ -51,7 +51,7 @@ describe('getElementFromQuery', () => {
           tag: 'input',
           name: 'tag',
         })
-      }).toThrow('Error: More than one html element of tag \'input\' was found using attribute named \'tag\'.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'input','name':'tag'}.")
     });
 
     it('should error out when no elements by tag name are found.', () => {
@@ -62,12 +62,12 @@ describe('getElementFromQuery', () => {
           tag: 'div',
           name: 'tag',
         })
-      }).toThrow('Error: No html element of tag \'div\' was found using attribute named \'tag\'.')
+      }).toThrow("No HTMLElement found. Query was {'tag':'div','name':'tag'}.")
     })
   });
 
   describe('id with attribute name and attribute value set', () => {
-    it('should should return an element by id when only one element exits', () => {
+    it('should return an element by id when only one element exits', () => {
       document.body.innerHTML = `<input id='idValue'></input>`;
 
       expect(getElementFromQuery({
@@ -90,12 +90,12 @@ describe('getElementFromQuery', () => {
           name: 'id',
           value: 'idValue',
         })
-      }).toThrow('Error: No html element of tag \'div\' was found using attribute named \'id\' having value \'idValue\'.')
+      }).toThrow("No HTMLElement found. Query was {'tag':'div','name':'id','value':'idValue'}.")
     })
   });
 
   describe('name with attribute name and attribute value set', () => {
-    it('should should return an element by name when only one element exits', () => {
+    it('should return an element by name when only one element exits', () => {
       document.body.innerHTML = `<div name='nameValue'></div><div id='idValue'></div>`;
 
       expect(getElementFromQuery({
@@ -115,7 +115,7 @@ describe('getElementFromQuery', () => {
           name: 'name',
           value: 'nameValue',
         })
-      }).toThrow('Error: More than one html element of tag \'div\' was found using attribute named \'name\' having value \'nameValue\'.');
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'div','name':'name','value':'nameValue'}.");
     });
 
     it('should error out when no elements by id are found.', () => {
@@ -127,13 +127,13 @@ describe('getElementFromQuery', () => {
           name: 'id',
           value: 'idValue',
         })
-      }).toThrow('Error: No html element of tag \'div\' was found using attribute named \'id\' having value \'idValue\'.')
+      }).toThrow("No HTMLElement found. Query was {'tag':'div','name':'id','value':'idValue'}.")
     })
   });
 
 
   describe('class with attribute name and attribute value set', () => {
-    it('should should return an element by class when only one element exits', () => {
+    it('should return an element by class when only one element exits', () => {
       document.body.innerHTML = `<div class='classValue'></div><div id='idValue'></div>`;
 
       expect(getElementFromQuery({
@@ -153,7 +153,7 @@ describe('getElementFromQuery', () => {
           name: 'name',
           value: 'nameValue',
         })
-      }).toThrow('Error: More than one html element of tag \'div\' was found using attribute named \'name\' having value \'nameValue\'.');
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'div','name':'name','value':'nameValue'}.");
     });
 
     it('should error out when no elements by id are found.', () => {
@@ -165,8 +165,56 @@ describe('getElementFromQuery', () => {
           name: 'name',
           value: 'nameValue',
         })
-      }).toThrow('Error: No html element of tag \'div\' was found using attribute named \'name\' having value \'nameValue\'.')
+      }).toThrow("No HTMLElement found. Query was {'tag':'div','name':'name','value':'nameValue'}.")
     })
+  });
+
+  describe('invalid query name', () => {
+    it(`should error when an unsupported attribute name is provided.`, () => {
+      document.body.innerHTML = `<form id='user'><input id='one' /></form>`;
+      expect(() => { getElementFromQuery({ 'name': 'id2', 'value': 'someValue' }); })
+        .toThrowError("Unsupported query name 'id2'.")
+    });
+
+  });
+
+
+  describe('value only', () => {
+    it('should return an element by id when value only provided in query', () => {
+      document.body.innerHTML = `<div id='one'></div><div id='two'></div>`;
+
+      expect(getElementFromQuery({
+        tag: 'div',
+        value: 'one',
+      })
+      ).toBeDefined();
+    });
+
+    it('should return an element by id when value only provided in query', () => {
+      document.body.innerHTML = `<div id='one'></div><div name='two'></div>`;
+
+      expect(getElementFromQuery({
+        tag: 'div',
+        value: 'two',
+      })
+      ).toBeDefined();
+    });
+
+    it('should error when no tag, name or value are provided in the query', () => {
+      document.body.innerHTML = `<div id='one'></div>`;
+
+      expect(() => {
+        getElementFromQuery({
+        })
+      }).toThrowError('Query requires at least one of tag, name or value.');
+    });
+
+    it(`should error when value only not found using id then name`, () => {
+      document.body.innerHTML = `<form id='user'><input id='one' /><input name='two' /></form>`;
+      expect(() => { getElementFromQuery({ 'value': 'three' }); })
+        .toThrowError("No HTMLElement found. Query was {'value':'three'}.")
+    });
+
   });
 
 });

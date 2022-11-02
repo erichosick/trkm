@@ -1,9 +1,30 @@
 import { HtmlElementQuery } from '@trkm/html-types-ts';
 
+const validateElement = (
+  query: HtmlElementQuery,
+  result: Element[] | HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element>,
+  formName: string = ''
+): HTMLElement => {
+  const queryStr = JSON.stringify(query).replace(/"/g, '\'',)
+  const formStr = formName === '' ? '' : ` on form '${formName}'`;
+
+  if (result.length > 1) {
+    throw Error(`More than one HTMLElement found${formStr}. Query was ${queryStr}.`);
+  } else if (result.length === 0) {
+    throw Error(`No HTMLElement found${formStr}. Query was ${queryStr}.`);
+  }
+
+  if (!(result[0] instanceof HTMLElement)) {
+    throw Error(`Element, instead of HTMLElement, found. Query was ${queryStr}.`);
+  }
+
+  return result[0];
+}
+
 export const getElementFromQuery = (
   query: HtmlElementQuery,
 ): HTMLElement => {
-  let result;
+  let result: HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element> = [];
 
   if (query.name && query.value) {
     // we know the name and value. Let's try and find it
@@ -19,63 +40,70 @@ export const getElementFromQuery = (
         result = document.getElementsByClassName(query.value);
         break;
       default:
-        throw Error(`Unsupported attribute name ${query.name}`);
+        throw Error(`Unsupported query name '${query.name}'.`);
     }
   } else if (query.value) {
-    // TODO: This code behind this else
-    // we only know the value. We will try and find the control by
-    // first looking for it by id, then name and finally class.
-    result = [];
-  } else { // name is tag OR undefined. Both case should go here.
-    result = document.getElementsByTagName(query.tag);
-  }
-
-  if (result.length !== 1) {
-    const missingName = query.name
-      ? ` using attribute named '${query.name}'` : '';
-    const missingValue = query.value
-      ? ` having value '${query.value}'` : '';
-    const tagValue = `element of tag '${query.tag}' was found`;
-    if (result.length > 1) {
-      throw Error(`Error: More than one html ${tagValue}${missingName}${missingValue}.`);
-    } else if (result.length === 0) {
-      throw Error(`Error: No html ${tagValue}${missingName}${missingValue}.`);
+    let element = document.getElementById(query.value);
+    if (!element) {
+      result = document.getElementsByName(query.value);
+    } else {
+      result = [element];
+    }
+  } else { // name is tag OR undefined. In both cases, we should go here.
+    if (query.tag) {
+      result = document.getElementsByTagName(query.tag);
+    } else {
+      throw Error('Query requires at least one of tag, name or value.');
     }
   }
-  // eslint-disable-next-line prefer-destructuring
-  return result[0];
+
+  return validateElement(query, result);
 };
 
-export const getFormElement = (
+export const getChildElement = (
   form: HTMLFormElement,
   query: HtmlElementQuery
-): HTMLElement | undefined => {
-  if (query.value) {
-    let items: HTMLCollectionBase = query.tag ?
-      form.getElementsByTagName(query.tag) : form.elements;
+): HTMLElement => {
+  // user must provide at the very least a name or value
+  if (query.value === undefined && query.name === undefined) {
+    throw Error(`HtmlElementQuery requires a query value and/or query name.`);
+  }
+  const formName = form.id ? form.id : form.name ? form.name : '(no id or name)';
 
-    const name = query.name;
-    const value = query.value.toLowerCase();
+  let result: Element[] = [];
 
-    for (const item of items) {
-      // looking for a specific named attribute
-      if (name) {
-        if (item.getAttribute(name)?.toLowerCase() === value) {
-          return item as HTMLElement;
-        }
-      } else {
-        if (item.getAttribute('id')?.toLowerCase() === value ||
-          item.getAttribute('name')?.toLowerCase() === value) {
-          return item as HTMLElement;
-        }
+  let items: HTMLCollectionBase = query.tag ?
+    form.getElementsByTagName(query.tag) : form.elements;
+
+  const name = query.name;
+  const value = query.value?.toLowerCase();
+
+  for (const item of items) {
+    if (name !== undefined && value !== undefined) {
+      // searching by name and value
+      if (item.getAttribute(name)?.toLowerCase() === value) {
+        result.push(item);
+      }
+    } else if (name !== undefined) {
+      // searching for just the existence of an element with a name
+      if (item.hasAttribute(name)) {
+        result.push(item);
+      }
+    } else {
+      // looking for a value within the name or id attribute
+      if (item.getAttribute('id')?.toLowerCase() === value ||
+        item.getAttribute('name')?.toLowerCase() === value) {
+        result.push(item);
       }
     }
-  } // else { throw an error? Don't know yet.}
+  }
 
-  return undefined;
+  return validateElement(query, result, formName);
 };
 
-export const getForm = (
+export type GetFormSignature = (query?: HtmlElementQuery) => HTMLFormElement;
+
+export const getForm: GetFormSignature = (
   query?: HtmlElementQuery
 ): HTMLFormElement => {
   const finalElement = query ? query : {
@@ -87,5 +115,5 @@ export const getForm = (
   if (result instanceof HTMLFormElement) {
     return result;
   }
-  throw Error(`Error: Expected an html '${finalElement.tag}' tag named '${finalElement.name}' but found an html element of type '${result.nodeName}'.`);
+  throw Error(`Expected an html '${finalElement.tag}' tag named '${finalElement.name}' but found an html element of type '${result.nodeName}'.`);
 };

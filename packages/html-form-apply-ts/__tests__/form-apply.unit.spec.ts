@@ -33,13 +33,13 @@ describe('formApply', () => {
 
     it('should error if a form is not found', () => {
       document.body.innerHTML = '<div></div>';
-      expect(() => { formApply({}) }).toThrow('Error: No html element of tag \'form\' was found using attribute named \'tag\'.');
+      expect(() => { formApply({}) }).toThrow("No HTMLElement found. Query was {'tag':'form','name':'tag'}.");
     });
 
   });
 
   describe('setting input', () => {
-    it.only('should successfully set input using all values', () => {
+    it('should successfully set input using all values', () => {
       const formHtml = '<form><input id="car_type"></input></form>';
       const context = {
         carType: 'volvo'
@@ -62,10 +62,39 @@ describe('formApply', () => {
       document.body.innerHTML = formHtml;
       let element = document.getElementById('car_type') as HTMLSelectElement;
       expect(element.value).toEqual('');
-      formApply({ formInput: inputDest }, context);
+      formApply({ destination: inputDest }, context);
       expect(element.value).toEqual('volvo');
 
     });
+
+    it('should successfully set input using all values and destination is an array', () => {
+      const formHtml = '<form><input id="car_type"></input></form>';
+      const context = {
+        carType: 'volvo'
+      };
+
+      const inputDest: InputDestination = {
+        pullFrom: {
+          source: {
+            type: 'context',
+            jsonPath: 'carType'
+          }
+        },
+        destination: {
+          tag: 'input',
+          name: 'id',
+          value: 'car_type'
+        }
+      };
+
+      document.body.innerHTML = formHtml;
+      let element = document.getElementById('car_type') as HTMLSelectElement;
+      expect(element.value).toEqual('');
+      formApply({ destination: [inputDest] }, context);
+      expect(element.value).toEqual('volvo');
+
+    });
+
   });
 });
 

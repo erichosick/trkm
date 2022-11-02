@@ -1,19 +1,14 @@
 import { FormDestination, HtmlElementQuery } from "@trkm/html-types-ts";
-import { getForm, getFormElement } from "@trkm/html-support-ts";
+import { getForm, getChildElement } from "@trkm/html-support-ts";
 import contextGet from './context-get';
 
-export const formInputSet = (
+export const destinationSet = (
   form: HTMLFormElement,
   elementQuery: HtmlElementQuery,
   value: string,
 ) => {
-  const element = getFormElement(form, elementQuery);
-
-  if (element !== undefined) {
-    element.setAttribute('value', value);
-  } else {
-    throw Error(`Fix this error message.`);
-  }
+  const element = getChildElement(form, elementQuery);
+  element.setAttribute('value', value);
 };
 
 const formApply = (
@@ -22,13 +17,18 @@ const formApply = (
 ): HTMLFormElement => {
   const form = getForm(formDestination.formQuery);
 
-  const formDestinationFields = Array.isArray(formDestination.formInput)
-    ? formDestination.formInput : formDestination.formInput
-      ? [formDestination.formInput] : [];
+  const formDestinationFields = Array.isArray(formDestination.destination)
+    ? formDestination.destination : formDestination.destination
+      ? [formDestination.destination] : [];
+
+  // const logicRan = Array.isArray(formDestination.destination)
+  // ? 'was array' : formDestination.destination
+  //   ? 'returns singlething in array' : 'returns empty';
+
 
   for (const destination of formDestinationFields) {
     const value = contextGet(context, destination.pullFrom);
-    formInputSet(form, destination.destination, value as string);
+    destinationSet(form, destination.destination, value as string);
   }
   return form;
 };

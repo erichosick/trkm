@@ -2,14 +2,14 @@ import { getForm } from '../src/index';
 
 describe('getForm', () => {
   describe('form no name provided', () => {
-    it(`should should return an element by tag name when only one element
+    it(`should return an element by tag name when only one element
       exits and no parameters provided`, () => {
       document.body.innerHTML = `<form></form>`;
 
       expect(getForm()).toBeDefined();
     });
 
-    it(`should should return an element by tag name when only one element
+    it(`should return an element by tag name when only one element
       exits and tag`, () => {
       document.body.innerHTML = `<form></form>`;
 
@@ -18,7 +18,7 @@ describe('getForm', () => {
       })).toBeDefined();
     });
 
-    it(`should should return an element by tag name when only one element
+    it(`should return an element by tag name when only one element
       exits and a name is used`, () => {
       document.body.innerHTML = `<form id='formId'></form>`;
 
@@ -29,7 +29,7 @@ describe('getForm', () => {
     });
 
 
-    it(`should should return an element by tag name when only one element
+    it(`should return an element by tag name when only one element
       exits and a name and attributeVAlue are used`, () => {
       document.body.innerHTML = `<form id='formId'></form>`;
 
@@ -47,7 +47,7 @@ describe('getForm', () => {
 
       expect(() => {
         getForm()
-      }).toThrow('Error: More than one html element of tag \'form\' was found using attribute named \'tag\'.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'form','name':'tag'}.")
     });
 
     it(`should error out when multiple elements are found
@@ -58,7 +58,7 @@ describe('getForm', () => {
         getForm({
           tag: 'form'
         })
-      }).toThrow('Error: More than one html element of tag \'form\' was found.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'form'}.")
     });
 
     it(`should error out when multiple elements are found
@@ -70,7 +70,7 @@ describe('getForm', () => {
           tag: 'form',
           name: 'name',
         })
-      }).toThrow('Error: More than one html element of tag \'form\' was found using attribute named \'name\'.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'form','name':'name'}.")
     });
 
     it(`should error out when multiple elements are found
@@ -83,7 +83,7 @@ describe('getForm', () => {
           name: 'name',
           value: 'theOneForm'
         })
-      }).toThrow('Error: More than one html element of tag \'form\' was found using attribute named \'name\' having value \'theOneForm\'.')
+      }).toThrow("More than one HTMLElement found. Query was {'tag':'form','name':'name','value':'theOneForm'}.")
     });
 
     it(`should error out when element found was not a form`, () => {
@@ -95,7 +95,7 @@ describe('getForm', () => {
           name: 'name',
           value: 'notAForm'
         })
-      }).toThrow('Error: Expected an html \'form\' tag named \'name\' but found an html element of type \'DIV\'.')
+      }).toThrow('Expected an html \'form\' tag named \'name\' but found an html element of type \'DIV\'.')
     });
 
     it(`should error out when element found was not a form`, () => {
@@ -107,7 +107,7 @@ describe('getForm', () => {
           name: 'name',
           value: 'notAForm'
         })
-      }).toThrow('Error: Expected an html \'form\' tag named \'name\' but found an html element of type \'DIV\'.')
+      }).toThrow('Expected an html \'form\' tag named \'name\' but found an html element of type \'DIV\'.')
     });
 
   });
