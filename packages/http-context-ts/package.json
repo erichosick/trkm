@@ -1,6 +1,6 @@
 {
   "name": "@trkm/http-context-ts",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Aggregates information about a current webpages's context, such as cookies and url parameters, into a single object for easy consumption.",
   "keywords": [
     "javascript",
