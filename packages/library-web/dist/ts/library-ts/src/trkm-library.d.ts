@@ -3,6 +3,7 @@ import { InsertIntoObjectSignature } from '@trkm/object-json-path-ts';
 import { WebPageContextSignature } from '@trkm/http-context-ts';
 import { SessionGetSignature, SessionInitSignature, SessionMergeSignature } from '@trkm/http-session-deepmerge-ts';
 import { FormApplySignature } from '@trkm/html-form-apply-ts';
+import { FormDestination } from '@trkm/html-types-ts';
 export interface TrkmLibrary {
     uuidGenerateV4: UuidGenerateSignature;
     insertIntoObject: InsertIntoObjectSignature;
@@ -13,5 +14,8 @@ export interface TrkmLibrary {
         merge: SessionMergeSignature;
     };
     formApply: FormApplySignature;
+    default: {
+        trackingDefault: FormDestination;
+    };
 }
 //# sourceMappingURL=trkm-library.d.ts.map

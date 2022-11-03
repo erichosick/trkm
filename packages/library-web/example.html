@@ -1,0 +1,33 @@
+<head>
+  <script src="./dist/bundle.js"></script>
+  <title>Tracking Defaults</title>
+</head>
+
+<body>
+  <form id='example_form'>
+    <p><input id="utm_medium" /></p>
+    <p><input id="utm_campaign" /></p>
+    <p><input id="utm_term" /></p>
+    <p><input id="utm_content" /></p>
+    <p><input id="utm_id" /></p>
+    <p><input id="adset_id" /></p>
+    <p><input id="lp_url" /></p>
+    <p><input id="lp_params" /></p>
+    <p><input id="tm_referer" /></p>
+    <p><input id="tm_event_id" /></p>
+  </form>
+  <script>
+    // Persist the current page context into the session. This helps us capture
+    // http parameters on a landing page which can be used later.
+    trkm.session.merge(trkm.context());
+
+    // At anytime, we can apply the mapping. formApply will find the
+    // HTMLFormElement on the page 
+    trkm.formApply(trkm.default.trackingDefault, trkm.session.get());
+
+  </script>
+  <p><a
+      href='example.html?utm_medium=medium01&utm_campaign=campaign02&utm_term=term03&utm_content=content04&utm_id=utmId05&adset_id=adset06'>Example
+      With Parameters</a></p>
+  <p><a href='example.html'>Example Without Parameters</a></p>
+</body>

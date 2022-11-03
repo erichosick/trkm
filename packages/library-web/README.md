@@ -1,3 +1,21 @@
+# **@trkm/library-web**
+
+Exposes the tracking magic library in the browser along with defaults.
+
+## Features
+
+## Usage
+
+In the following example, the context of the webpage is stored in a session (`trkm.session.merge(trkm.context())`). The url parameter `userName`, if provided, is maintained between webpages.
+
+```html
+<head>
+  <!-- We don't recommend using github as a CDN. This is just for the example code-->
+  <script src="./dist/bundle.js"></script>
+  <title>Example Tracking Page</title>
+</head>
+
+<body>
 <head>
   <!-- We don't recommend using github as a CDN. This is just for the example code-->
   <script src="./dist/bundle.js"></script>
@@ -25,27 +43,27 @@
         {
           // pull a value from document.title
           pullFrom: {
-            required: false,
             source: {
               type: 'context',
-              jsonPath: 'document.url.urlParams.userName'
+              jsonPath: 'document.title'
             }
           },
           // Find an input tag on the form using attribute name and the value
           destination: {
             tag: 'input',
             name: 'id',
-            value: 'user_name'
+            value: 'document_title'
           }
         },
         {
-          // Taking advantage of 'defaults', we can pullFrom an object
-          // using the JsonPath and place on an HTMLElement destination
-          // using the a string value (document_title in this case): that
-          // value compared against either the `id` attribute or `name`
-          // attribute of the HTMLElement
-          pullFrom: 'document.title',
-          destination: 'document_title',
+          pullFrom: {
+            required: false,
+            source: {
+              type: 'context',
+              jsonPath: 'document.url.urlParams.userName'
+            }
+          },
+          destination: { value: 'user_name' }
         },
       ]
     };
@@ -57,3 +75,12 @@
   </script>
   <p>The form field should contain the title of the page.</p>
 </body>
+```
+
+## Development
+
+See the [monorepo readme](https://www.github.com/erichosick/trkm).
+
+## License
+
+Licensed under [MIT](./LICENSE.md).

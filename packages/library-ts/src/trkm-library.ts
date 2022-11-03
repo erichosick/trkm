@@ -7,6 +7,7 @@ import {
   SessionMergeSignature
 } from '@trkm/http-session-deepmerge-ts';
 import { FormApplySignature } from '@trkm/html-form-apply-ts';
+import { FormDestination } from '@trkm/html-types-ts';
 
 export interface TrkmLibrary {
   uuidGenerateV4: UuidGenerateSignature,
@@ -17,5 +18,8 @@ export interface TrkmLibrary {
     init: SessionInitSignature,
     merge: SessionMergeSignature,
   },
-  formApply: FormApplySignature
+  formApply: FormApplySignature,
+  default: {
+    trackingDefault: FormDestination
+  }
 };

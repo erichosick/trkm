@@ -9,6 +9,7 @@ import {
   sessionMerge
 } from '@trkm/http-session-deepmerge-ts';
 import formApply from '@trkm/html-form-apply-ts';
+import { trackingDefault } from '@trkm/tracking-default-ts'
 
 export const library: TrkmLibrary = {
   uuidGenerateV4,
@@ -19,20 +20,16 @@ export const library: TrkmLibrary = {
     init: sessionInit,
     merge: sessionMerge,
   },
-  formApply: formApply
+  formApply: formApply,
+  default: {
+    trackingDefault: trackingDefault,
+  },
 }
 
 export { TrkmLibrary } from './trkm-library';
 
 declare module globalThis {
   let trkm: TrkmLibrary
-
-  // TODO: Provide debug information in development mode only?  
-  // let trkmd: {
-  //   form: GetFormSignature
-  //   formDetails: FormDetailsSignature
-  //   pirateForm: PirateSkillsSignature,
-  // }
 };
 
 export default globalThis;

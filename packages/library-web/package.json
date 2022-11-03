@@ -1,6 +1,6 @@
 {
-  "name": "@trkm/http-context",
-  "version": "0.7.0",
+  "name": "@trkm/library-web",
+  "version": "0.0.0",
   "description": "Places the tracking magic library and interface into the globalThis.trkm root.",
   "keywords": [
     "javascript",
@@ -10,7 +10,7 @@
     "html context"
   ],
   "author": "Eric Hosick <erichosick@gmail.com>",
-  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/http-context",
+  "homepage": "https://github.com/erichosick/trkm/tree/main/packages/library-web",
   "bugs": {
     "url": "https://github.com/erichosick/trkm/issues",
     "email": "erichosick@gmail.com"
@@ -39,13 +39,7 @@
     "build:watch": "rm -rf ./dist && webpack --mode production --watch"
   },
   "dependencies": {
-    "@trkm/html-form-apply-ts": "^0.4.0",
-    "@trkm/http-context-ts": "^0.2.1",
-    "@trkm/http-cookies-ts": "^0.4.0",
-    "@trkm/http-url-ts": "^0.1.1",
-    "@trkm/http-uuid-generate-v4-ts": "^0.0.1",
-    "@trkm/library-ts": "^0.4.0",
-    "@trkm/object-json-path-ts": "^0.1.5"
+    "@trkm/library-ts": "^0.4.0"
   },
   "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711"
 }
