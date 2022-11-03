@@ -1,6 +1,6 @@
 {
   "name": "@trkm/library-web",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Places the tracking magic library and interface into the globalThis.trkm root.",
   "keywords": [
     "javascript",
@@ -39,7 +39,7 @@
     "build:watch": "rm -rf ./dist && webpack --mode production --watch"
   },
   "dependencies": {
-    "@trkm/library-ts": "^0.4.0"
+    "@trkm/library-ts": "^0.5.0"
   },
   "gitHead": "8729c726b713f044977c0f41cb6b6202dc9c3711"
 }
