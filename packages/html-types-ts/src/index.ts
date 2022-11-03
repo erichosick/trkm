@@ -89,10 +89,10 @@ export interface ContextSource {
   required?: boolean
 
   /**
-   * context - The source is the context object built using wpContext.
+   * context - Default. The source is the context object built using wpContext.
    * uuidV4 - The source is a uuid generated using uuidGenerateV4.
    */
-  type: 'context' | 'uuidV4'
+  type?: 'context' | 'uuidV4'
 
   /**
    * 
@@ -103,17 +103,28 @@ export interface ContextSource {
 // -----------------------------------------------------------------------------
 
 export interface InputDestination {
+  /** Defines if both pullFrom and destination are required/not required when
+   * these values are undefined.
+   */
+  required?: boolean
+
+
   /**
    * The location within the json blob whose value will be written to the
    * form field. For example 'utm.medium' would result in the value being
    * pulled from { utm: { medium: 'some value' }}.
    */
-  pullFrom: ContextGetConfig
+  pullFrom: ContextGetConfig | string
 
   /**
-   * Information about the element we are mapping to.
+   * A query to find the destination HTMLElement with which the value will be
+   * written to. When a string is provided, it is assumed that the string is a
+   * value and a search for the HTMLElement will be done using the id attribute
+   * and then the name attribute. For example, if the destination is 'user_name'
+   * then an attempt will be done to find an HTMLElement with id='user_name' and
+   * if that isn't found, then try name='user_name'.
    */
-  destination: HtmlElementQuery
+  destination: HtmlElementQuery | string
 }
 
 /**
@@ -121,6 +132,14 @@ export interface InputDestination {
  * destinations.
  */
 export interface FormDestination {
+
+  /** Used as the default value for all destination
+   * properties that have a required property. This value is only used if the
+   * required values in a given destination is unknown.
+   */
+
+  required?: boolean
+
 
   /** Query information required to find a form. When the form element is
    * empty, it is assumed that for a given web page, there is only one form

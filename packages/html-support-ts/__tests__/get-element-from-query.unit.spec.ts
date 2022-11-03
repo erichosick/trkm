@@ -54,7 +54,7 @@ describe('getElementFromQuery', () => {
       }).toThrow("More than one HTMLElement found. Query was {'tag':'input','name':'tag'}.")
     });
 
-    it('should error out when no elements by tag name are found.', () => {
+    it('should error out when no elements by tag name and attribute name are found.', () => {
       document.body.innerHTML = `<input></input>`;
 
       expect(() => {

@@ -1,5 +1,11 @@
 import { HtmlElementQuery } from '@trkm/html-types-ts';
 
+export type ValidateElementSignature = (
+  query: HtmlElementQuery,
+  result: Element[] | HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element>,
+  formName?: string
+) => HTMLElement | undefined;
+
 /**
  * Validates the result of searching for an element on a webpage or form. Throws
  * an error if no element was found or the element returned was not an
@@ -10,18 +16,25 @@ import { HtmlElementQuery } from '@trkm/html-types-ts';
  * the form.
  * @returns The validated element: pulling it from the array.
  */
-const validateElement = (
+const validateElement: ValidateElementSignature = (
   query: HtmlElementQuery,
   result: Element[] | HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element>,
   formName: string = ''
-): HTMLElement => {
+): HTMLElement | undefined => {
   const queryStr = JSON.stringify(query).replace(/"/g, '\'',)
   const formStr = formName === '' ? '' : ` on form '${formName}'`;
 
   if (result.length > 1) {
     throw Error(`More than one HTMLElement found${formStr}. Query was ${queryStr}.`);
   } else if (result.length === 0) {
-    throw Error(`No HTMLElement found${formStr}. Query was ${queryStr}.`);
+
+    // query.required is true "by default" but an optional property of query.
+    // So, we consider both true and undefined as true
+    if (query.required === true || query.required === undefined) {
+      throw Error(`No HTMLElement found${formStr}. Query was ${queryStr}.`);
+    } else {
+      return undefined;
+    }
   }
 
   if (!(result[0] instanceof HTMLElement)) {
@@ -31,15 +44,19 @@ const validateElement = (
   return result[0];
 }
 
+export type GetElementFromQuerySignature = (
+  query: HtmlElementQuery,
+) => HTMLElement | undefined;
+
 /**
  * Queries for an element on a webpage.
  * @param query An HtmlElementQuery used to find the element.
  * @returns An HTMLElement if found. Throws an exception if no element was
  * found.
  */
-export const getElementFromQuery = (
+export const getElementFromQuery: GetElementFromQuerySignature = (
   query: HtmlElementQuery,
-): HTMLElement => {
+): HTMLElement | undefined => {
   let result: HTMLElement[] | NodeListOf<HTMLElement> | HTMLCollectionOf<Element> = [];
 
   if (query.name && query.value) {
@@ -76,16 +93,21 @@ export const getElementFromQuery = (
   return validateElement(query, result);
 };
 
+export type GetChildElementSignature = (
+  form: HTMLFormElement,
+  query: HtmlElementQuery
+) => HTMLElement | undefined;
+
 /**
  * Finds a child element on a form using an HtmlElementQuery.
  * @param form An html form element.
  * @param query An HtmlElementQuery.
  * @returns The form element if found. Errors if no element is found.
  */
-export const getChildElement = (
+export const getChildElement: GetChildElementSignature = (
   form: HTMLFormElement,
   query: HtmlElementQuery
-): HTMLElement => {
+): HTMLElement | undefined => {
   // user must provide at the very least a name or value
   if (query.value === undefined && query.name === undefined) {
     throw Error(`HtmlElementQuery requires a query value and/or query name.`);
@@ -146,5 +168,5 @@ export const getForm: GetFormSignature = (
   if (result instanceof HTMLFormElement) {
     return result;
   }
-  throw Error(`Expected an html '${finalElement.tag}' tag named '${finalElement.name}' but found an html element of type '${result.nodeName}'.`);
+  throw Error(`Expected an html '${finalElement.tag}' tag named '${finalElement.name}' but found an html element of type '${result ? result.nodeName : 'undefined'}'.`);
 };

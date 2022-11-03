@@ -19,6 +19,7 @@ const valueFromSource: ValueFromSourceSignature = (
 ): ContextConfigResultType => {
   let result = undefined;
   switch (source.type) {
+    case undefined:
     case 'context':
       if (source.jsonPath) {
         if (context !== undefined) {

@@ -8,6 +8,15 @@ describe('contextGet', () => {
       jest.clearAllMocks();
     });
 
+    it('should default to context if source.type is not provided', () => {
+      const search: ContextGetConfig = {
+        source: [{
+          jsonPath: 'user.age'
+        }]
+      };
+      expect(contextGet(search, { user: { age: 5 } })).toEqual(5);
+    });
+
     it('should find a form if only one exists on the page', () => {
       const search: ContextGetConfig = {
         required: false,

@@ -25,27 +25,27 @@
         {
           // pull a value from document.title
           pullFrom: {
-            source: {
-              type: 'context',
-              jsonPath: 'document.title'
-            }
-          },
-          // Find an input tag on the form using attribute name and the value
-          destination: {
-            tag: 'input',
-            name: 'id',
-            value: 'document_title'
-          }
-        },
-        {
-          pullFrom: {
             required: false,
             source: {
               type: 'context',
               jsonPath: 'document.url.urlParams.userName'
             }
           },
-          destination: { value: 'user_name' }
+          // Find an input tag on the form using attribute name and the value
+          destination: {
+            tag: 'input',
+            name: 'id',
+            value: 'user_name'
+          }
+        },
+        {
+          // Taking advantage of 'defaults', we can pullFrom an object
+          // using the JsonPath and place on an HTMLElement destination
+          // using the a string value (document_title in this case): that
+          // value compared against either the `id` attribute or `name`
+          // attribute of the HTMLElement
+          pullFrom: 'document.title',
+          destination: 'document_title',
         },
       ]
     };
@@ -55,5 +55,5 @@
     trkm.formApply(contextToFormMap, trkm.session.get());
 
   </script>
-  <p>The form field should contain the title of the page</p>
+  <p>The form field should contain the title of the page.</p>
 </body>

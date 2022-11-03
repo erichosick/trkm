@@ -7,14 +7,16 @@ export interface HtmlElementQuery {
 }
 export interface ContextSource {
     required?: boolean;
-    type: 'context' | 'uuidV4';
+    type?: 'context' | 'uuidV4';
     jsonPath?: string;
 }
 export interface InputDestination {
-    pullFrom: ContextGetConfig;
-    destination: HtmlElementQuery;
+    required?: boolean;
+    pullFrom: ContextGetConfig | string;
+    destination: HtmlElementQuery | string;
 }
 export interface FormDestination {
+    required?: boolean;
     formQuery?: HtmlElementQuery;
     destination?: InputDestination | InputDestination[];
 }

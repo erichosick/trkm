@@ -18,6 +18,13 @@ In the following example, the context of the webpage is stored in a session (`tr
 </head>
 
 <body>
+<head>
+  <!-- We don't recommend using github as a CDN. This is just for the example code-->
+  <script src="./dist/bundle.js"></script>
+  <title>Example Tracking Page</title>
+</head>
+
+<body>
   <form id='example_form'>
     <input id="document_title" />
     <input id="user_name" />
@@ -68,7 +75,7 @@ In the following example, the context of the webpage is stored in a session (`tr
     trkm.formApply(contextToFormMap, trkm.session.get());
 
   </script>
-  <p>The form field should contain the title of the page</p>
+  <p>The form field should contain the title of the page.</p>
 </body>
 ```
 

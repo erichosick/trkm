@@ -1,4 +1,4 @@
-import { FormDestination, HtmlElementQuery } from "@trkm/html-types-ts";
+import { ContextGetConfig, FormDestination, HtmlElementQuery, InputDestination } from "@trkm/html-types-ts";
 import { getForm, getChildElement } from "@trkm/html-support-ts";
 import contextGet from './context-get';
 
@@ -40,16 +40,41 @@ const formApply: FormApplySignature = (
   formDestination: FormDestination,
   context?: object
 ): HTMLFormElement => {
+  formDestination.required = formDestination.required === undefined
+    ? true : formDestination.required;
+
   const form = getForm(formDestination.formQuery);
 
-  const formDestinationFields = Array.isArray(formDestination.destination)
-    ? formDestination.destination : formDestination.destination
-      ? [formDestination.destination] : [];
+  const formDestinationFields: InputDestination[] =
+    Array.isArray(formDestination.destination)
+      ? formDestination.destination : formDestination.destination
+        ? [formDestination.destination] : [];
+
+
 
   for (const destination of formDestinationFields) {
-    const value = contextGet(destination.pullFrom, context);
+
+    // override required of destination only if it is undefined.
+    destination.required = destination.required === undefined ?
+      formDestination.required : destination.required;
+
+    const pullFrom: ContextGetConfig =
+      (typeof destination.pullFrom === 'string') ?
+        { source: { jsonPath: destination.pullFrom } }
+        : destination.pullFrom;
+
+
+    pullFrom.required = pullFrom.required === undefined ?
+      destination.required : pullFrom.required;
+    const value = contextGet(pullFrom, context);
     if (value !== undefined) {
-      destinationSet(form, destination.destination, value as string);
+      // in cases where destination is a string, convert the destination to
+      // an HTMLElementQuery
+      const destQuery: HtmlElementQuery = (typeof destination.destination === 'string')
+        ? { value: destination.destination } : destination.destination;
+      destQuery.required = destQuery.required === undefined
+        ? destination.required : destQuery.required;
+      destinationSet(form, destQuery, value as string);
     }
   }
   return form;
