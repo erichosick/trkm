@@ -1,11 +1,13 @@
 <head>
   <!-- We don't recommend using github as a CDN. This is just for the example code-->
-  <script src="https://github.com/erichosick/trkm/blob/main/packages/http-context/dist/bundle.js"></script>
+  <script src="./dist/bundle.js"></script>
+  <title>Example Tracking Page</title>
 </head>
 
 <body>
-  <form>
-    <input id="document_title"></input>
+  <form id='example_form'>
+    <input id="document_title" />
+    <input id="user_name" />
   </form>
   <script>
     // Persist the current page context into the session. This helps us capture
@@ -17,7 +19,7 @@
       formQuery: {
         tag: 'form',
         name: 'id',
-        value: 'document'
+        value: 'example_form'
       },
       destination: [
         {
@@ -31,10 +33,19 @@
           // Find an input tag on the form using attribute name and the value
           destination: {
             tag: 'input',
-            name: 'name',
+            name: 'id',
             value: 'document_title'
           }
-        }
+        },
+        {
+          pullFrom: {
+            source: {
+              type: 'context',
+              jsonPath: 'document.url.urlParams.userName'
+            }
+          },
+          destination: { value: 'user_name' }
+        },
       ]
     };
 
@@ -43,5 +54,5 @@
     trkm.formApply(contextToFormMap, trkm.session.get());
 
   </script>
-  <h1>The form field should contain the title of the page</h1>
+  <p>The form field should contain the title of the page</p>
 </body>

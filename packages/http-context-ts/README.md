@@ -17,6 +17,7 @@ Creates an easy to use javascript object containing information about a webpage 
 ```typescript
 import { wpContext } from '@trkm/http-context-ts';
 const context = wpContext();
+console.log(context);
 ```
 
 ## Intent

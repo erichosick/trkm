@@ -8,17 +8,19 @@ Places the tracking magic library and interface into the globalThis.trkm root.
 
 ## Usage
 
-In the following example, the context of the webpage is stored in a session (`trkm.session.merge(trkm.context())`).
+In the following example, the context of the webpage is stored in a session (`trkm.session.merge(trkm.context())`). The url parameter `userName`, if provided, is maintained between webpages.
 
 ```html
 <head>
   <!-- We don't recommend using github as a CDN. This is just for the example code-->
-  <script src="https://github.com/erichosick/trkm/blob/main/packages/http-context/dist/bundle.js"></script>
+  <script src="../dist/bundle.js"></script>
+  <title>Example Tracking Page</title>
 </head>
 
 <body>
-  <form>
-    <input id="document_title"></input>
+  <form id='example_form'>
+    <input id="document_title" />
+    <input id="user_name" />
   </form>
   <script>
     // Persist the current page context into the session. This helps us capture
@@ -30,7 +32,7 @@ In the following example, the context of the webpage is stored in a session (`tr
       formQuery: {
         tag: 'form',
         name: 'id',
-        value: 'document'
+        value: 'example_form'
       },
       destination: [
         {
@@ -44,10 +46,19 @@ In the following example, the context of the webpage is stored in a session (`tr
           // Find an input tag on the form using attribute name and the value
           destination: {
             tag: 'input',
-            name: 'name',
+            name: 'id',
             value: 'document_title'
           }
-        }
+        },
+        {
+          pullFrom: {
+            source: {
+              type: 'context',
+              jsonPath: 'document.url.urlParams.userName'
+            }
+          },
+          destination: { value: 'user_name' }
+        },
       ]
     };
 
@@ -56,7 +67,7 @@ In the following example, the context of the webpage is stored in a session (`tr
     trkm.formApply(contextToFormMap, trkm.session.get());
 
   </script>
-  <h1>Checkout the console.</h1>
+  <p>The form field should contain the title of the page</p>
 </body>
 ```
 
