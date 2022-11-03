@@ -1,6 +1,6 @@
 {
   "name": "@trkm/library-ts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Tracking Madness library.",
   "keywords": [
     "Tracking madness"
@@ -29,10 +29,10 @@
     "url": "git+https://github.com/erichosick/trkm.git"
   },
   "dependencies": {
-    "@trkm/html-form-apply-ts": "^0.3.0",
+    "@trkm/html-form-apply-ts": "^0.3.1",
     "@trkm/http-context-ts": "^0.2.1",
     "@trkm/http-session-deepmerge-ts": "^0.1.0",
     "@trkm/http-uuid-generate-v4-ts": "^0.0.1",
-    "@trkm/object-json-path-ts": "^0.1.4"
+    "@trkm/object-json-path-ts": "^0.1.5"
   }
 }
