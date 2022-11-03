@@ -32,7 +32,7 @@ yarn
 # continuously run tests
 yarn test:unit:watch
 
-# run unit tests
+# build any distributables and run unit tests
 yarn test:unit
 
 # build javascript library from typescript library
@@ -49,7 +49,7 @@ yarn publish:all
 
 ```bash
 # verify test run
-yarn test:integration
+yarn test:unit
 
 # verify build works
 yarn build
@@ -82,7 +82,3 @@ yarn lerna add {@name/existing-module} --scope={@name/new-package-name}
 # example
 yarn lerna add @trkm/http-cookies-ts --scope=@trkm/http-context
 ```
-
-# TODO
-
-* Add documentation on how to run tests across all packages.

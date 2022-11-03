@@ -1,9 +1,12 @@
+export declare type ContextConfigResultType = string | number | object | unknown[] | undefined;
 export interface HtmlElementQuery {
+    required?: boolean;
     tag?: string;
     name?: string;
     value?: string;
 }
 export interface ContextSource {
+    required?: boolean;
     type: 'context' | 'uuidV4';
     jsonPath?: string;
 }
@@ -24,7 +27,7 @@ export declare type ContextConfig = {
 export declare type ContextConfigs = ContextConfig[];
 export declare type ContextGetConfig = {
     required?: boolean;
-    default?: string | number | unknown[];
+    default?: ContextConfigResultType;
     source?: ContextSource | ContextSource[];
 };
 export declare type ContextGetConfigs = ContextGetConfig[];

@@ -41,7 +41,7 @@ describe('object-json-path-ts insertIntoObject', () => {
         () => {
           insertIntoObject(user, { path: 'user.name', value: 'joe' });
         },
-      ).toThrow('Unable to add a value to path \'user.name\' because the value at \'user\' is a primitive when an object was expected.');
+      ).toThrow('Unable to add a value to path \'user.name\' because the value at \'user\' is a primitive when an object is needed.');
     });
   });
 });
@@ -53,7 +53,7 @@ describe('object-json-path-ts getFromObject', () => {
         () => {
           getFromObject({ user: 'joe' }, 'user.name');
         },
-      ).toThrow('Unable to get a value from path \'user.name\' because the value at \'user\' is a primitive when an object was expected.');
+      ).toThrow('Unable to get a value from path \'user.name\' because the value at \'user\' is a primitive when an object is needed.');
     });
 
     it('should throw an error when the path at the last value was not found', () => {
@@ -62,6 +62,10 @@ describe('object-json-path-ts getFromObject', () => {
           getFromObject({ user: { name: 'joe' } }, 'user.age');
         },
       ).toThrow('Unable to get a value from path \'user.age\' because the object at \'user\' did not have property age.');
+    });
+
+    it('should NOT throw an error when the path at the last value was not found but required is false', () => {
+      expect(getFromObject({ user: { name: 'joe' } }, 'user.age', false)).toBeUndefined;
     });
 
     it('should throw an error when the path was not found', () => {
@@ -80,7 +84,8 @@ describe('object-json-path-ts getFromObject', () => {
       ).toThrow('Unable to resolve path. Object did not have a property \'nope\' at path \'\'.');
     });
   });
-  describe('invalid call', () => {
+
+  describe('valid call', () => {
     it('should successfully get a value', () => {
       expect(getFromObject({ admin: 'joe' }, 'admin')).toEqual('joe');
       expect(getFromObject({ admin: { age: 32 } }, 'admin.age')).toEqual(32);
@@ -90,6 +95,10 @@ describe('object-json-path-ts getFromObject', () => {
       expect(
         getFromObject({ admin: { privileges: ['a', 'b'] } }, 'admin'),
       ).toEqual({ privileges: ['a', 'b'] });
+      expect(
+        getFromObject({ admin: { privileges: 'a privilege' } }, 'admin'),
+      ).toEqual({ privileges: 'a privilege' });
     });
+
   });
 });

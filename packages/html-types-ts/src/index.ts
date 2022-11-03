@@ -1,5 +1,12 @@
 
 /**
+ * Types of things that can be returned from a context configuration.
+ */
+export type ContextConfigResultType = string | number | object | unknown[] | undefined;
+
+
+
+/**
  * An interface which defines properties needed to search for a given html
  * element on a web page. Warning! Only one matching html element should be
  *  found. If more than one element is found, an error is thrown.
@@ -21,6 +28,14 @@
  * In all cases, if no html element is found, an error is thrown.
  */
 export interface HtmlElementQuery {
+
+  /** 
+   * Defines if a given query must return an HTMLElement (true by
+   * default). When true, an error is thrown. When false, an error is not
+   * thrown.
+   */
+
+  required?: boolean
 
   /**
    * The expected type of html element we are searching for on the webpage (
@@ -63,6 +78,15 @@ export interface HtmlElementQuery {
  * pull the value from a Url Parameter named 'utm_medium'.
  */
 export interface ContextSource {
+
+  /** Defines if a given context configuration must return a value (true by
+   * default). When true, an error is shown on the console if no value was
+   * found. When false, an error is not shown and the value is not required.
+   * required is ignored if a default value is provided (see default below)
+   * TODO: Provide a callback so a developer can handle the error.
+   */
+
+  required?: boolean
 
   /**
    * context - The source is the context object built using wpContext.
@@ -171,7 +195,8 @@ export type ContextGetConfig = {
   /**
    * (optional) Defines if the value being pulled from a given context is
    *  required. When true, an error is thrown if no value is found. When false,
-   * no error is thrown and undefined is returned.
+   * no error is thrown and undefined is returned. Overrides
+   * ContextSource.required if it is undefined.
    */
 
   required?: boolean
@@ -180,7 +205,7 @@ export type ContextGetConfig = {
    * found on the webpage. When a default value is provided, the required
    * option is ignored.
    */
-  default?: string | number | unknown[]
+  default?: ContextConfigResultType
 
   /**
    * An object of OR an array of one or more context sources. The order of the

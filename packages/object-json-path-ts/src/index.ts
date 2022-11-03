@@ -1,3 +1,5 @@
+import { ContextConfigResultType } from "@trkm/html-types-ts";
+
 /**
  * Maps a json path to a value.
  */
@@ -17,11 +19,10 @@ export interface JsonPathValue {
 
 export type JsonPathValues = JsonPathValue[];
 
-
-export type insertIntoObjectInterface = (
-  jsObj: unknown,
+export type InsertIntoObjectSignature = (
+  jsObj: object,
   jsonPathValues: JsonPathValue | JsonPathValues,
-) => unknown;
+) => object;
 
 /**
  * Adds a value to an object given a JSONPath.
@@ -46,10 +47,10 @@ export type insertIntoObjectInterface = (
  *   const anObject = {};
  *   insertIntoObject(anObject, { path: 'user.age', value: 23 }));
  */
-export const insertIntoObject: insertIntoObjectInterface = (
-  jsObj: unknown,
+export const insertIntoObject: InsertIntoObjectSignature = (
+  jsObj: object,
   jsonPathValues: JsonPathValue | JsonPathValues,
-): unknown => {
+): object => {
   // Simplify code logic below
   const jsonPaths = Array.isArray(jsonPathValues)
     ? jsonPathValues : [jsonPathValues];
@@ -71,7 +72,7 @@ export const insertIntoObject: insertIntoObjectInterface = (
       current = current[name];
     }
     if (typeof current !== 'object') {
-      throw TypeError(`Unable to add a value to path '${jsonPath.path}' because the value at '${currentPath.join('.')}' is a primitive when an object was expected.`);
+      throw TypeError(`Unable to add a value to path '${jsonPath.path}' because the value at '${currentPath.join('.')}' is a primitive when an object is needed.`);
     }
     // 2. Set the final property unless it is not an object.
     current[properties[properties.length - 1]] = jsonPath.value;
@@ -80,16 +81,24 @@ export const insertIntoObject: insertIntoObjectInterface = (
   return jsObj;
 };
 
+export type GetFromObjectSignature = (
+  jsObj: object,
+  path: string,
+  required?: boolean
+) => ContextConfigResultType;
+
 /**
  * Returns a value from an object given a JSON path.
  * @param jsObj The object we're reading the values from.
  * @param path The JSONpath to the value.
  * @returns The value found from the object.
  */
-export const getFromObject = (
-  jsObj: unknown,
+export const getFromObject: GetFromObjectSignature = (
+  jsObj: object,
   path: string,
-) => {
+  required: boolean = true
+): ContextConfigResultType => {
+
   const properties = path.split('.');
   let current: any = jsObj;
   const currentPath = [];
@@ -105,9 +114,15 @@ export const getFromObject = (
   const propertyName = properties[properties.length - 1];
 
   if (typeof current !== 'object') {
-    throw TypeError(`Unable to get a value from path '${path}' because the value at '${currentPath.join('.')}' is a primitive when an object was expected.`);
+    throw TypeError(`Unable to get a value from path '${path}' because the value at '${currentPath.join('.')}' is a primitive when an object is needed.`);
   } else if (!(Object.prototype.hasOwnProperty.call(current, propertyName))) {
-    throw Error(`Unable to get a value from path '${path}' because the object at '${currentPath.join('.')}' did not have property ${propertyName}.`);
+    const message = `Unable to get a value from path '${path}' because the object at '${currentPath.join('.')}' did not have property ${propertyName}.`;
+    if (required) {
+      throw Error(message);
+    } else {
+      // TODO: logging in debug mode.
+      return undefined
+    }
   }
   return current[propertyName];
 };

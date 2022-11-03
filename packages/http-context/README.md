@@ -13,7 +13,7 @@ In the following example, the context of the webpage is stored in a session (`tr
 ```html
 <head>
   <!-- We don't recommend using github as a CDN. This is just for the example code-->
-  <script src="../dist/bundle.js"></script>
+  <script src="./dist/bundle.js"></script>
   <title>Example Tracking Page</title>
 </head>
 
@@ -52,6 +52,7 @@ In the following example, the context of the webpage is stored in a session (`tr
         },
         {
           pullFrom: {
+            required: false,
             source: {
               type: 'context',
               jsonPath: 'document.url.urlParams.userName'

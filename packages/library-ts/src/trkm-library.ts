@@ -1,5 +1,5 @@
 import { UuidGenerateSignature } from '@trkm/http-uuid-generate-v4-ts';
-import { insertIntoObjectInterface } from '@trkm/object-json-path-ts';
+import { InsertIntoObjectSignature } from '@trkm/object-json-path-ts';
 import { WebPageContextSignature } from '@trkm/http-context-ts';
 import {
   SessionGetSignature,
@@ -10,7 +10,7 @@ import { FormApplySignature } from '@trkm/html-form-apply-ts';
 
 export interface TrkmLibrary {
   uuidGenerateV4: UuidGenerateSignature,
-  insertIntoObject: insertIntoObjectInterface,
+  insertIntoObject: InsertIntoObjectSignature,
   context: WebPageContextSignature,
   session: {
     get: SessionGetSignature,

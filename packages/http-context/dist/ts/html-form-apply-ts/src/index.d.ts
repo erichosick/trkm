@@ -1,5 +1,4 @@
-import { FormDestination, HtmlElementQuery } from "@trkm/html-types-ts";
-export declare const destinationSet: (form: HTMLFormElement, elementQuery: HtmlElementQuery, value: string) => void;
+import { FormDestination } from "@trkm/html-types-ts";
 export declare type FormApplySignature = (formDestination: FormDestination, context?: object) => HTMLFormElement;
 declare const formApply: FormApplySignature;
 export default formApply;
