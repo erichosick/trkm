@@ -1,5 +1,8 @@
 import { TrkmLibrary } from './trkm-library';
-declare const library: TrkmLibrary;
+export declare const library: TrkmLibrary;
 export { TrkmLibrary } from './trkm-library';
-export default library;
+declare module globalThis {
+    let trkm: TrkmLibrary;
+}
+export default globalThis;
 //# sourceMappingURL=index.d.ts.map

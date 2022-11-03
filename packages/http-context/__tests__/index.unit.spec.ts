@@ -1,4 +1,4 @@
-import globalThis from '../src/globals';
+import globalThis from '@trkm/library-ts';
 // executes globalThis.trkm = library;
 import '../src/index';
 

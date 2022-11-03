@@ -1,5 +1,4 @@
-import globalThis from './globals';
-import library from '@trkm/library-ts';
+import globalThis, { library } from '@trkm/library-ts';
 
 // TODO: Provide debug information in development mode only?
 // import { getForm } from '@trkm/html-support-ts';

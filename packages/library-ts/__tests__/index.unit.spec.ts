@@ -1,4 +1,4 @@
-import library from '../src/index';
+import { library } from '../src/index';
 
 // importing index builds globalThis.trkm
 import '../src/index';

@@ -10,7 +10,7 @@ import {
 } from '@trkm/http-session-deepmerge-ts';
 import formApply from '@trkm/html-form-apply-ts';
 
-const library: TrkmLibrary = {
+export const library: TrkmLibrary = {
   uuidGenerateV4,
   insertIntoObject,
   context: wpContext,
@@ -24,5 +24,15 @@ const library: TrkmLibrary = {
 
 export { TrkmLibrary } from './trkm-library';
 
-export default library;
+declare module globalThis {
+  let trkm: TrkmLibrary
 
+  // TODO: Provide debug information in development mode only?  
+  // let trkmd: {
+  //   form: GetFormSignature
+  //   formDetails: FormDetailsSignature
+  //   pirateForm: PirateSkillsSignature,
+  // }
+};
+
+export default globalThis;
