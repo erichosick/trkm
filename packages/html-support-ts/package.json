@@ -1,6 +1,6 @@
 {
   "name": "@trkm/html-support-ts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A very small typescript library used to find html elements on a webpage.",
   "keywords": [
     "typescript",
